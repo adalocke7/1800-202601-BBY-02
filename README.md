@@ -67,6 +67,7 @@ elmo-hikes/
 
 ## Contributors
 Adam Locke- BCIT CST student
+Maneet Singh- BCIT CST student
 
 ---
 
