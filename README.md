@@ -67,8 +67,8 @@ elmo-hikes/
 
 ## Contributors
 Adam Locke- BCIT CST student
+Ye Naing Lin(Jonathan) - BCIT CST student
 Maneet Singh- BCIT CST student
-
 ---
 
 
