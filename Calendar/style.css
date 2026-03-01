@@ -1,0 +1,15 @@
+.calendar-btn {
+  font-size: 24px;
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+#calendarContainer {
+  margin-top: 20px;
+}
+
+iframe {
+  width: 100%;
+}
