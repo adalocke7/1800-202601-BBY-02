@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FIFA Quiz</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="wrap">
+    <header class="top">
+      <h1>⚽ FIFA Quiz</h1>
+      <p>10 questions each attempt</p>
+    </header>
+
+    <section class="card">
+      <!-- Progress -->
+      <div class="progress">
+        <div class="progress-top">
+          <span id="progressText">Question 1 of 10</span>
+          <span id="scoreMini">Score: 0</span>
+        </div>
+        <div class="bar">
+          <div class="bar-fill" id="barFill" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <!-- Quiz Area -->
+      <div id="quizArea" class="quiz-area">
+        <h2 id="questionText">Loading...</h2>
+        <div id="optionsArea" class="options"></div>
+
+        <div id="feedback" class="feedback" aria-live="polite"></div>
+
+        <div class="actions">
+          <button id="prevBtn" class="btn ghost" type="button">Previous</button>
+          <button id="nextBtn" class="btn" type="button">Next</button>
+        </div>
+
+        <div class="actions extra">
+          <button id="newAttemptBtn" class="btn ghost" type="button">Restart Quiz</button>
+        </div>
+      </div>
+
+      <!-- Results Area -->
+      <div id="resultsArea" class="results hidden">
+        <h2 id="resultTitle">Your Results</h2>
+        <p id="resultSummary" class="summary"></p>
+
+        <div id="reviewArea" class="review"></div>
+
+        <div class="actions">
+          <button id="restartBtn" class="btn" type="button">Restart-quiz</button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <small>
+      BCIT-BBY2 Copyright
+      </small>
+    </footer>
+  </main>
+
+  <!-- Sound Effects (local files) -->
+  <audio id="goalSound" src="sounds/goal.mp3" preload="auto"></audio>
+  <audio id="failSound" src="sounds/fail.mp3" preload="auto"></audio>
+
+  <script src="app.js"></script>
+</body>
+</html>
