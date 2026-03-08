@@ -318,7 +318,7 @@ body {
   opacity: 0.8;
 }
 
-.collection{
+.btn-collection{
   background: linear-gradient(135deg, var(--accent) 0%, #00b894 100%);
   color: white;
   border: none;
@@ -329,7 +329,7 @@ body {
   font-weight: 500;
 }
 
-.collection:hover{
+.btn-collection-btn:hover{
   transform: translateY(-2px);
   box-shadow: 0 5px 15px (rgba(0, 206, 201, 0.3));
 }

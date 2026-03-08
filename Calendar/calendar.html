@@ -32,7 +32,7 @@
       
       <div class="calendar-footer">
         <button class="today-btn" id="today-btn"><i class="fas fa-calendar-day"></i> Today</button>
-        <button class="collection" id="collection" type="button"><p>Collection</p></button>
+        <button class="btn-collection" id="btn-collection" type="button"><p>Collection</p></button>
         <div class="event-indicator">
           <i class="fas fa-circle" style="color: var(--accent); font-size: 0.6rem;"></i>
           <span>Has events</span>
@@ -52,9 +52,7 @@
     </div>
   </div>
 
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
-
-<script src="calendar.js"></script>
+<script type="module" src="../src/firebaseConfig.js"></script>
+<script type="module" src="calendar.js"></script>
 </body>
 </html>

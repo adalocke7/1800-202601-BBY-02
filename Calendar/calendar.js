@@ -1,17 +1,13 @@
-// 1. AT THE VERY TOP: Initialize Firebase
-const firebaseConfig = {
-  apiKey: "AIzaSyDTYgM4NO4rchkgRqqhoDSfsLPu681uTaw",
-  authDomain: "fifa-web-app-1fb5d.firebaseapp.com",
-  projectId: "fifa-web-app-1fb5d",
-  storageBucket: "fifa-web-app-1fb5d.firebasestorage.app",
-  messagingSenderId: "520690644603",
-  appId: "1:520690644603:web:e6ee073e0ff3034610d4de",
-  measurementId: "G-J2GL22VQB6"
-};
-
-// Initialize Firebase and define 'db' FIRST
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore(); 
+import { db } from '../src/firebaseConfig.js';
+import { 
+  collection, 
+  getDocs, 
+  doc, 
+  getDoc, 
+  setDoc, 
+  deleteDoc, 
+  serverTimestamp 
+} from "firebase/firestore";
 
 document.addEventListener('DOMContentLoaded', function() {
   const monthYearEl = document.getElementById('month-year');
@@ -21,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const todayBtn = document.getElementById('today-btn');
   const eventDateEl = document.getElementById('event-date');
   const eventListEl = document.getElementById('event-list');
-  const collection = document.getElementById('collection');
+  const collectionBtn = document.getElementById('btn-collection');
   
   let currentDate = new Date();
   let selectedDate = null;
@@ -30,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // FETCH DATA FROM FIREBASE
   async function fetchEvents() {
     try {
-      const querySnapshot = await db.collection("events").get();
+      const querySnapshot = await getDocs(collection(db, "events"));
       events = {}; // Reset
       querySnapshot.forEach((doc) => {
         // We expect each document ID to be a date like "2026-6-13"
@@ -43,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  function renderCalendar() {
+    function renderCalendar() {
     const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
     const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
     const prevLastDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
@@ -111,7 +107,7 @@ async function showEvents(dateStr) {
 
       // 1. Create a unique ID for this match to track it in Firebase
       const eventId = `${dateStr}-${match.text.replace(/\s+/g, '-')}`;
-      const docRef = db.collection("saved_events").doc(eventId);
+      const docRef = doc(db, "saved_events", eventId);
 
       item.innerHTML = `
         <div class="event-color"></div>
@@ -130,8 +126,8 @@ async function showEvents(dateStr) {
       const saveBtn = item.querySelector('.save-button');
 
       // 3. Check Firebase: Is this already saved?
-      const doc = await docRef.get();
-      if (doc.exists) {
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
         saveBtn.innerHTML = "<b>Saved!</b>";
         saveBtn.style.background = "#28a745"; // Success Green
         saveBtn.style.color = "white";
@@ -139,18 +135,18 @@ async function showEvents(dateStr) {
 
       // 4. Add the Toggle Click Event
       saveBtn.onclick = async () => {
-        const currentDoc = await docRef.get();
+        const currentSnap = await getDoc(docRef);
         
-        if (currentDoc.exists) {
+        if (currentSnap.exists()) {
           // If already saved, REMOVE it
-          await docRef.delete();
+          await deleteDoc(docRef);
           saveBtn.innerHTML = "<b>Save</b>";
           saveBtn.style.background = ""; // Back to default
           saveBtn.style.color = "";
           console.log("Unsaved!");
         } else {
           // If not saved, ADD it
-          await docRef.set({
+          await setDoc(docRef, {
             date: dateStr,
             text: match.text,
             time: match.time,
@@ -205,8 +201,8 @@ async function showEvents(dateStr) {
   nextMonthBtn.onclick = () => { currentDate.setMonth(currentDate.getMonth() + 1); renderCalendar(); };
   todayBtn.onclick = () => { currentDate = new Date(); selectedDate = new Date(); fetchEvents(); };
 
-  if (collection) {
-    collection.onclick = () => {
+  if (collectionBtn) {
+    collectionBtn.onclick = () => {
       window.location.href = "favorite.html";
     }
   }

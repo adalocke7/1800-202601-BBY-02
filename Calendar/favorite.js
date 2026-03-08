@@ -1,23 +1,19 @@
-// 1. AT THE VERY TOP: Initialize Firebase
-const firebaseConfig = {
-  apiKey: "AIzaSyDTYgM4NO4rchkgRqqhoDSfsLPu681uTaw",
-  authDomain: "fifa-web-app-1fb5d.firebaseapp.com",
-  projectId: "fifa-web-app-1fb5d",
-  storageBucket: "fifa-web-app-1fb5d.firebasestorage.app",
-  messagingSenderId: "520690644603",
-  appId: "1:520690644603:web:e6ee073e0ff3034610d4de",
-  measurementId: "G-J2GL22VQB6"
-};
-
-// Initialize Firebase and define 'db' FIRST
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore(); 
+import { db } from '../src/firebaseConfig.js';
+import { 
+  collection, 
+  getDocs, 
+  doc, 
+  getDoc, 
+  setDoc, 
+  deleteDoc, 
+  serverTimestamp 
+} from "firebase/firestore";
 
 document.addEventListener('DOMContentLoaded', async () => {
     const favoriteEvent = document.getElementById("favorite-events");
 
     try {
-        const querySnapshot = await db.collection("saved_events").get();
+        const querySnapshot = await getDocs(collection(db, "saved_events"));
 
         favoriteEvent.innerHTML = "";
 
@@ -26,9 +22,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             return;
         }
 
-        querySnapshot.forEach((doc) => {
-            const data = doc.data();
-            const eventID = doc.id;
+        querySnapshot.forEach((docSnap) => {
+            const data = docSnap.data();
+            const eventID = docSnap.id;
 
             const item = document.createElement("div");
             item.className = "event-item";
@@ -48,7 +44,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             
             const removeBtn = item.querySelector(".save-button");
             removeBtn.onclick = async () => {
-                await db.collection("saved_events").doc(eventID).delete();
+                const docRef = doc(db, "saved_events", eventID);
+                await deleteDoc(docRef);
                 item.remove();
                 if (favoriteEvent.children.length === 0) {
                     favoriteEvent.innerHTML = '<div class="no-events">You haven\'t saved any events yet.</div>';

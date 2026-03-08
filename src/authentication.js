@@ -8,6 +8,8 @@
 
 // Import the initialized Firebase Authentication object
 import { auth } from "/src/firebaseConfig.js";
+import { db } from "/src/firebaseConfig.js";
+import { doc, setDoc } from "firebase/firestore";
 
 // Import specific functions from the Firebase Auth SDK
 import {
