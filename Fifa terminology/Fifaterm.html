@@ -1,41 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FIFA Terminology</title>
-  <link rel="stylesheet" href="Fifaterm.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FIFA Terminology</title>
+    <link rel="stylesheet" href="Fifaterm.css" />
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>FIFA Terminology</h1>
-      <p>Search football terms stored in Firebase</p>
-    </header>
+    <div class="container">
+        <header>
+            <h1>FIFA Terminology</h1>
+            <p>Search football terms from Firebase Firestore</p>
+        </header>
 
-    <section class="search-section">
-      <input
-        type="text"
-        id="searchInput"
-        placeholder="Search a term like offside, penalty, assist..."
-      />
-    </section>
+        <section class="search-box">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search terms like offside, penalty, free kick..."
+            />
+        </section>
 
-    <section class="form-section">
-      <h2>Add New Term</h2>
-      <form id="termForm">
-        <input type="text" id="termName" placeholder="Term name" required />
-        <textarea id="termDefinition" placeholder="Definition" required></textarea>
-        <button type="submit">Add Term</button>
-      </form>
-    </section>
+        <section id="termsContainer" class="terms-container">
+            <p class="loading">Loading terminology...</p>
+        </section>
+    </div>
 
-    <section class="results-section">
-      <h2>Terms</h2>
-      <div id="termsList" class="terms-list"></div>
-    </section>
-  </div>
-
-  <script type="module" src="fifaterm.js"></script>
+    <script type="module" src="fifaterm.js"></script>
 </body>
 </html>
