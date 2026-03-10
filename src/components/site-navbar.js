@@ -11,7 +11,6 @@ class SiteNavbar extends HTMLElement {
 
     renderNavbar() {
         this.innerHTML = `
-            <!-- Navbar: single source of truth -->
             <nav class="navbar navbar-expand-lg navbar-light bg-info">
                 <div class="container-fluid">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -25,17 +24,15 @@ class SiteNavbar extends HTMLElement {
                                     <img src="./images/menu.png" height="24">
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                    <li><a class="dropdown-item" href="./main.html">Home</a></li>
+                                    <li><a class="dropdown-item" href="#">Termaninology</a></li>
+                                    <li><a class="dropdown-item" href="#">Calendar</a></li>
+                                    <li><a class="dropdown-item" href="#">Quiz</a></li>
+                                    <li><a class="dropdown-item" href="#">Map</a></li>
                                 </ul>
                             </div>
                         </ul>
                         <div class="d-flex align-items-center gap-2 ms-lg-2" id="rightControls">
-                            <form class="d-flex align-items-center gap-2 my-2 my-lg-0" id="navSearch" role="search">
-                                <input class="form-control d-none d-sm-block w-auto" type="search" placeholder="Search" aria-label="Search">
-                                <button class="btn btn-outline-light d-none d-sm-inline-block" type="submit">Search</button>
-                            </form>
                             <div id="authControls" class="auth-controls d-flex align-items-center gap-2 my-2 my-lg-0">
                                 <!-- populated by JS -->
                             </div>

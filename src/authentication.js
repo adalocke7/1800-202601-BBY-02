@@ -72,43 +72,7 @@ export async function logoutUser() {
   window.location.href = "index.html";
 }
 
-// -------------------------------------------------------------
-// checkAuthState()
-// -------------------------------------------------------------
-// Observes changes in the user's authentication state (login/logout)
-// and updates the UI or redirects accordingly.
-//
-// If the user is on "main.html":
-//   - If logged in → displays "Hello, [Name]!"
-//   - If not logged in → redirects to "index.html"
-//
-// This function should be called once when the page loads.
-//
-// Usage:
-//   checkAuthState();
-// -------------------------------------------------------------
-export function checkAuthState() {
-  onAuthStateChanged(auth, (user) => {
-    if (window.location.pathname.endsWith("main.html")) {
-      if (user) {
-        const displayName = user.displayName || user.email;
-        $("#welcomeMessage").text(`Hello, ${displayName}!`);
-      } else {
-        window.location.href = "index.html";
-      }
-    }
-  });
-}
 
-// -------------------------------------------------------------
-// onAuthReady(callback)
-// -------------------------------------------------------------
-// Wrapper for Firebase's onAuthStateChanged()
-// Runs the given callback(user) when Firebase resolves or changes auth state.
-// Useful for showing user info or redirecting after login/logout.
-export function onAuthReady(callback) {
-  return onAuthStateChanged(auth, callback);
-}
 
 // -------------------------------------------------------------
 // authErrorMessage(error)
