@@ -1,4 +1,5 @@
-import { db } from '../src/firebaseConfig.js';
+import { db, auth } from '../src/firebaseConfig.js';
+import { onAuthStateChanged } from 'firebase/auth';
 import { 
   collection, 
   getDocs, 
@@ -12,8 +13,15 @@ import {
 document.addEventListener('DOMContentLoaded', async () => {
     const favoriteEvent = document.getElementById("favorite-events");
 
+    onAuthStateChanged(auth, async (user) => {
+        if (!user) {
+            favoriteEvent.innerHTML = "<p>Please log in to view the saved events.</p>";
+            return;
+        }
+    
+
     try {
-        const querySnapshot = await getDocs(collection(db, "saved_events"));
+        const querySnapshot = await getDocs(collection(db, "users", user.uid, "saved_events"));
 
         favoriteEvent.innerHTML = "";
 
@@ -44,7 +52,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             
             const removeBtn = item.querySelector(".save-button");
             removeBtn.onclick = async () => {
-                const docRef = doc(db, "saved_events", eventID);
+                const docRef = doc(db, "users", user.uid, "saved_events", eventID);
                 await deleteDoc(docRef);
                 item.remove();
                 if (favoriteEvent.children.length === 0) {
@@ -57,5 +65,5 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error("Error loading favorites: ", error);
         favoriteEvent.innerHTML = '<div class="no-events">Error loading events. Please try again.</div>';
     }
-    
+    });
 });

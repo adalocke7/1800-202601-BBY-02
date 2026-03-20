@@ -1,4 +1,5 @@
-import { db } from '../src/firebaseConfig.js';
+import { auth, db } from '../src/firebaseConfig.js';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { 
   collection, 
   getDocs, 
@@ -6,6 +7,7 @@ import {
   getDoc, 
   setDoc, 
   deleteDoc, 
+  updateDoc,
   serverTimestamp 
 } from "firebase/firestore";
 
@@ -19,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const eventListEl = document.getElementById('event-list');
   const collectionBtn = document.getElementById('btn-collection');
   
+  let currentUser = null;
   let currentDate = new Date();
   let selectedDate = null;
   let events = {}; // This will be populated from Firebase
@@ -91,12 +94,23 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      currentUser = user;
+      fetchEvents();
+    } else {
+      console.log("No user logged in.")
+    }
+  });
+
 async function showEvents(dateStr) {
   const [y, m, d] = dateStr.split('-').map(Number);
   const dateObj = new Date(y, m - 1, d);
   const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   eventDateEl.textContent = `${months[dateObj.getMonth()]} ${d}, ${y}`;
   
+  if (!currentUser) return alert("Please log in to save events!");
+
   eventListEl.innerHTML = '';
   
   if (events[dateStr]) {
@@ -107,7 +121,7 @@ async function showEvents(dateStr) {
 
       // 1. Create a unique ID for this match to track it in Firebase
       const eventId = `${dateStr}-${match.text.replace(/\s+/g, '-')}`;
-      const docRef = doc(db, "saved_events", eventId);
+      const docRef = doc(db, "users", currentUser.uid, "saved_events", eventId);
 
       item.innerHTML = `
         <div class="event-color"></div>

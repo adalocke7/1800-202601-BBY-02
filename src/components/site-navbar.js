@@ -26,7 +26,7 @@ class SiteNavbar extends HTMLElement {
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="./main.html">Home</a></li>
                                     <li><a class="dropdown-item" href="#">Termaninology</a></li>
-                                    <li><a class="dropdown-item" href="#">Calendar</a></li>
+                                    <li><a class="dropdown-item" href="../Calendar/calendar.html">Calendar</a></li>
                                     <li><a class="dropdown-item" href="#">Quiz</a></li>
                                     <li><a class="dropdown-item" href="#">Map</a></li>
                                 </ul>
