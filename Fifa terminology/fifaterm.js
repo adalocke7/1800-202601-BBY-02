@@ -1,4 +1,4 @@
-import { db } from "./firebaseConfig";
+import { db } from "../src/firebaseConfig.js";
 import { collection, getDocs } from "firebase/firestore";
 
 const termsContainer = document.getElementById("termsContainer");

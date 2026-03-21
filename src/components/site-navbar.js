@@ -19,10 +19,10 @@ class SiteNavbar extends HTMLElement {
                         </button>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="./main.html">Home</a></li>
-                            <li><a class="dropdown-item" href="#">Termaninology</a></li>
-                            <li><a class="dropdown-item" href="#">Calendar</a></li>
-                            <li><a class="dropdown-item" href="#">Quiz</a></li>
-                            <li><a class="dropdown-item" href="#">Map</a></li>
+                            <li><a class="dropdown-item" href="./Fifa terminology/Fifaterm.html ">Termaninology</a></li>
+                            <li><a class="dropdown-item" href="./Calendar/calendar.html">Calendar</a></li>
+                            <li><a class="dropdown-item" href="./Quiz/quiz.html">Quiz</a></li>
+                            <li><a class="dropdown-item" href="./Map/map.html">Map</a></li>
                         </ul>
                     </div>
                     <div class="d-flex align-items-center gap-2 ms-lg-2" id="rightControls">

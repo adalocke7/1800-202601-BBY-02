@@ -1,0 +1,75 @@
+.login-container {
+    background-image: url('../../images/Fifa.jpg');
+    background-size: cover;
+    height: 100vh;
+    margin: 0;
+    color: #facc15;
+}
+
+.navbar {
+    background: linear-gradient(135deg, #0f172a, #1d4ed8);
+    border-color: #0f172a;
+}
+
+.btn {
+    background-color: transparent !important;
+    color: #facc15 !important;
+    background: linear-gradient(135deg, #0f172a, #1d4ed8);
+}
+
+/* Feedback Form Styles */
+.feedback-container {
+    padding: 40px 0;
+    background-color: #f8f9fa;
+}
+
+.feedback-container .form-control,
+.feedback-container .form-select {
+    border-color: #dee2e6;
+    border-radius: 0.375rem;
+}
+
+.feedback-container .form-control:focus,
+.feedback-container .form-select:focus {
+    border-color: #1d4ed8;
+    box-shadow: 0 0 0 0.2rem rgba(29, 78, 216, 0.25);
+}
+
+.feedback-container .form-label {
+    font-weight: 600;
+    color: #0f172a;
+    margin-bottom: 0.5rem;
+}
+
+.feedback-container .text-danger {
+    color: #dc3545;
+    margin-left: 0.25rem;
+}
+
+.feedback-container .text-muted {
+    font-size: 0.875rem;
+}
+
+.feedback-container .btn-primary {
+    background: linear-gradient(135deg, #0f172a, #1d4ed8) !important;
+    border: none;
+    color: white !important;
+    font-weight: 600;
+    padding: 0.5rem 1.5rem;
+}
+
+.feedback-container .btn-primary:hover {
+    background: linear-gradient(135deg, #1d4ed8, #2563eb) !important;
+}
+
+.feedback-container .btn-secondary {
+    background-color: #6c757d !important;
+    border: none;
+    color: white !important;
+}
+
+.feedback-container h2 {
+    color: #0f172a;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
