@@ -1,6 +1,6 @@
-import {onAuthStateChanged} from "firebase/auth";     //Detect login state
-import { auth } from '/src/firebaseConfig.js';        //Firebase authentication connection
-import { logoutUser } from '/src/authentication.js';  //Perform logout action
+import {onAuthStateChanged} from "firebase/auth";     
+import { auth } from '/src/firebaseConfig.js';        
+import { logoutUser } from '/src/authentication.js';  
 
 class SiteNavbar extends HTMLElement {
     constructor() {
@@ -13,29 +13,21 @@ class SiteNavbar extends HTMLElement {
         this.innerHTML = `
             <nav class="navbar navbar-expand-lg navbar-light bg-info">
                 <div class="container-fluid">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto">
-                            <div class="dropdown">
-                                <button class="btn btn-transparent dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="./images/menu.png" height="24">
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="./main.html">Home</a></li>
-                                    <li><a class="dropdown-item" href="#">Termaninology</a></li>
-                                    <li><a class="dropdown-item" href="#">Calendar</a></li>
-                                    <li><a class="dropdown-item" href="#">Quiz</a></li>
-                                    <li><a class="dropdown-item" href="#">Map</a></li>
-                                </ul>
-                            </div>
+                    <div class="dropdown">
+                        <button class="btn btn-transparent dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="./images/menu.png" height="24">
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="./main.html">Home</a></li>
+                            <li><a class="dropdown-item" href="#">Termaninology</a></li>
+                            <li><a class="dropdown-item" href="#">Calendar</a></li>
+                            <li><a class="dropdown-item" href="#">Quiz</a></li>
+                            <li><a class="dropdown-item" href="#">Map</a></li>
                         </ul>
-                        <div class="d-flex align-items-center gap-2 ms-lg-2" id="rightControls">
-                            <div id="authControls" class="auth-controls d-flex align-items-center gap-2 my-2 my-lg-0">
-                                <!-- populated by JS -->
-                            </div>
+                    </div>
+                    <div class="d-flex align-items-center gap-2 ms-lg-2" id="rightControls">
+                        <div id="authControls" class="auth-controls d-flex align-items-center gap-2 my-2 my-lg-0">
+                            <!-- populated by JS -->
                         </div>
                     </div>
                 </div>
