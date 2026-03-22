@@ -1,0 +1,47 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #0f172a, #1d4ed8);
+    color: white;
+    padding: 20px;
+  }
+  
+body {
+    font-family: Arial, sans-serif;
+  
+    /* BACKGROUND IMAGE */
+    background-image: url("image.jpg");
+    background-size: cover;       
+    background-position: center;   
+    background-repeat: no-repeat;  
+    background-attachment: fixed; 
+    color: white;
+    padding: 20px;
+  }
+  .container {
+    max-width: 900px;
+    margin: auto;
+  }
+  
+  header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  #searchInput {
+    padding: 10px;
+    width: 100%;
+    border-radius: 8px;
+    border: none;
+  }
+  
+  #termsContainer {
+    display: grid;
+    gap: 15px;
+    margin-top: 20px;
+  }
+  
+  .term-card {
+    background: rgba(255,255,255,0.1);
+    padding: 15px;
+    border-radius: 10px;
+  }

@@ -3,8 +3,48 @@
 body {
   margin: 0;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  background: #0b1220;
+
+  background-image: url("images/image.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+
   color: #e5e7eb;
+}
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.title-img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: -1;
+}
+.opt.correct {
+  border-color: #22c55e;
+  background: rgba(34, 197, 94, 0.2);
+}
+
+.opt.wrong {
+  border-color: #fb7185;
+  background: rgba(251, 113, 133, 0.2);
+}
+.card {
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
 }
 
 .wrap {

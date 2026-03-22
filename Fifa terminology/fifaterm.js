@@ -1,3 +1,5 @@
+// fifaterm.js
+
 import { db } from "../src/firebaseConfig.js";
 import { collection, getDocs } from "firebase/firestore";
 
@@ -6,30 +8,39 @@ const searchInput = document.getElementById("searchInput");
 
 let allTerms = [];
 
-// Load terminology
+// Load terminology from Firestore
 async function loadTerms() {
+  try {
+    allTerms = []; // reset to avoid duplicates
 
-  const querySnapshot = await getDocs(collection(db, "Fifa Terminology"));
+    const querySnapshot = await getDocs(collection(db, "Fifa Terminology"));
 
-  querySnapshot.forEach((doc) => {
-
-    allTerms.push({
-      name: doc.id,
-      definition: doc.data().definition
+    querySnapshot.forEach((doc) => {
+      allTerms.push({
+        name: doc.id,
+        definition: doc.data().definition
+      });
     });
 
-  });
+    displayTerms(allTerms);
 
-  displayTerms(allTerms);
+  } catch (error) {
+    console.error("Error loading terms:", error);
+    termsContainer.innerHTML = "<p>Error loading data</p>";
+  }
 }
 
 // Display cards
 function displayTerms(terms) {
-
   termsContainer.innerHTML = "";
 
-  terms.forEach(term => {
+  // If no results
+  if (terms.length === 0) {
+    termsContainer.innerHTML = "<p>No results found</p>";
+    return;
+  }
 
+  terms.forEach((term) => {
     const card = document.createElement("div");
     card.className = "term-card";
 
@@ -39,23 +50,20 @@ function displayTerms(terms) {
     `;
 
     termsContainer.appendChild(card);
-
   });
-
 }
 
 // Search filter
 searchInput.addEventListener("input", () => {
-
   const text = searchInput.value.toLowerCase();
 
-  const filtered = allTerms.filter(term =>
+  const filtered = allTerms.filter((term) =>
     term.name.toLowerCase().includes(text) ||
     term.definition.toLowerCase().includes(text)
   );
 
   displayTerms(filtered);
-
 });
 
-loadTerms();
+// Ensure DOM is loaded before running
+document.addEventListener("DOMContentLoaded", loadTerms);
