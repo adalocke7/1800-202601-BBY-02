@@ -1,3 +1,9 @@
+/*
+Calendar UI adapted from an open-source project by WingsBRStudio.
+Source: https://github.com/WingsBRStudio/java...
+*/
+
+// Import functions from firebase and firebaseConfig.js
 import { auth, db } from '../src/firebaseConfig.js';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { 
@@ -11,7 +17,9 @@ import {
   serverTimestamp 
 } from "firebase/firestore";
 
-document.addEventListener('DOMContentLoaded', function() {
+// Wait until the HTML page is fully loaded before running the script
+document.addEventListener('DOMContentLoaded', function () {
+  // Get references to HTML elements used in the calendar
   const monthYearEl = document.getElementById('month-year');
   const daysEl = document.getElementById('days');
   const prevMonthBtn = document.getElementById('prev-month');
@@ -21,57 +29,86 @@ document.addEventListener('DOMContentLoaded', function() {
   const eventListEl = document.getElementById('event-list');
   const collectionBtn = document.getElementById('btn-collection');
   
+  // Variables used for user session and calendar state
   let currentUser = null;
   let currentDate = new Date();
   let selectedDate = null;
   let events = {}; // This will be populated from Firebase
 
-  // FETCH DATA FROM FIREBASE
+  // Fetch events from firebase
   async function fetchEvents() {
     try {
+
+      // Get all documents from the "events" collection
       const querySnapshot = await getDocs(collection(db, "events"));
-      events = {}; // Reset
+      events = {}; // Reset events object
+
+      // Loop through each document
       querySnapshot.forEach((doc) => {
-        // We expect each document ID to be a date like "2026-6-13"
-        // and the data to have a "matches" array.
+
+        // Each document ID is expected to be a date (ex: "2026-6-13")
+        // The document contains an array of matches
         events[doc.id] = doc.data().matches;
       });
+
+      // Re-render the calendar after loading events
       renderCalendar();
+
     } catch (error) {
       console.error("Firebase fetch error:", error);
     }
   }
+    // Render calendar
+  function renderCalendar() {
 
-    function renderCalendar() {
+    // Determine first and last day of the current month
     const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
     const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+
+    // Last day of previous month
     const prevLastDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
+
+    // Day index positions
     const firstDayIndex = firstDay.getDay();
     const lastDayIndex = lastDay.getDay();
+
+    // Calculate number of days to show from next month
     const nextDays = 7 - lastDayIndex - 1;
     
+    // Month names
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+    // Display month and year at the top of calendar
     monthYearEl.innerHTML = `${months[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
     
     let days = "";
 
-    // Prev month days
+    // Prev month days (for calendar layout)
     for (let x = firstDayIndex; x > 0; x--) {
       days += `<div class="day other-month">${prevLastDay.getDate() - x + 1}</div>`;
     }
 
     // Current month days
     for (let i = 1; i <= lastDay.getDate(); i++) {
+
+      // Create date key used in Firebase
       const dateKey = `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${i}`;
+
+      // Check if events exist on this date
       const hasEvent = events[dateKey] !== undefined;
+
+      // Assign CSS class
       let dayClass = 'day' + (hasEvent ? ' has-events' : '');
 
+      // Check if today
       const isToday = i === new Date().getDate() && currentDate.getMonth() === new Date().getMonth() && currentDate.getFullYear() === new Date().getFullYear();
       if (isToday) dayClass += ' today';
       
+      // Check if selected
       const isSelected = selectedDate && i === selectedDate.getDate() && currentDate.getMonth() === selectedDate.getMonth();
       if (isSelected) dayClass += ' selected';
 
+      // Add day element
       days += `<div class="${dayClass}" data-date="${dateKey}">${i}</div>`;
     }
 
@@ -80,141 +117,134 @@ document.addEventListener('DOMContentLoaded', function() {
       days += `<div class="day other-month">${j}</div>`;
     }
     
+    // Insert generated calendar days into HTML
     daysEl.innerHTML = days;
 
-    // Click event for days
+    // Add click event to each day
     document.querySelectorAll('.day:not(.other-month)').forEach(day => {
       day.addEventListener('click', () => {
+
+        // Get date stored in HTML
         const dateStr = day.getAttribute('data-date');
+
+        // Convert string to Date object
         const [y, m, d] = dateStr.split('-').map(Number);
         selectedDate = new Date(y, m - 1, d);
+
+        // Re-render calendar and show events
         renderCalendar();
         showEvents(dateStr);
       });
     });
   }
 
+  // Check user login state
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      currentUser = user;
-      fetchEvents();
+      currentUser = user; // Save logged-in user
+      fetchEvents(); // Load events from Firebase
     } else {
       console.log("No user logged in.")
     }
   });
 
-async function showEvents(dateStr) {
-  const [y, m, d] = dateStr.split('-').map(Number);
-  const dateObj = new Date(y, m - 1, d);
-  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  eventDateEl.textContent = `${months[dateObj.getMonth()]} ${d}, ${y}`;
   
-  if (!currentUser) return alert("Please log in to save events!");
+  async function showEvents(dateStr) {
 
-  eventListEl.innerHTML = '';
+    // Convert string date to Date object
+    const [y, m, d] = dateStr.split('-').map(Number);
+    const dateObj = new Date(y, m - 1, d);
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+    // Display date title
+    eventDateEl.textContent = `${months[dateObj.getMonth()]} ${d}, ${y}`;
   
-  if (events[dateStr]) {
-    // We use a regular for loop or forEach to handle the async status check
-    events[dateStr].forEach(async (match) => {
-      const item = document.createElement('div');
-      item.className = 'event-item';
+    // Ensure user is logged in
+    if (!currentUser) return alert("Please log in to save events!");
 
-      // 1. Create a unique ID for this match to track it in Firebase
-      const eventId = `${dateStr}-${match.text.replace(/\s+/g, '-')}`;
-      const docRef = doc(db, "users", currentUser.uid, "saved_events", eventId);
+    // Clear previous event list
+    eventListEl.innerHTML = '';
+  
+    if (events[dateStr]) {
 
-      item.innerHTML = `
-        <div class="event-color"></div>
-        <div class="event-time">${match.time}</div>
-        <div class="event-details">
+      // Loop through matches
+      events[dateStr].forEach(async (match) => {
+        const item = document.createElement('div');
+        item.className = 'event-item';
+
+        // Unique ID for each match event
+        const eventId = `${dateStr}-${match.text.replace(/\s+/g, '-')}`;
+
+        // Firebase path for saved events
+        const docRef = doc(db, "users", currentUser.uid, "saved_events", eventId);
+
+        // Create event HTML
+        item.innerHTML = `
+          <div class="event-color"></div>
+          <div class="event-time">${match.time}</div>
+          <div class="event-details">
           <div class="event-text"><strong>${match.text}</strong></div>
           <div class="event-location" style="font-size: 0.8rem; color: #636e72;">
             <i class="fas fa-map-marker-alt"></i> ${match.location}
-            <div><button class="save-button" id="btn-${eventId}" type="button"><b>Save</b></button></div>
-         </div>
-        </div>
-      `;
-      eventListEl.appendChild(item);
+          <div><button class="save-button" id="btn-${eventId}" type="button"><b>Save</b></button></div>
+          </div>
+          </div>
+        `;
 
-      // 2. Reference the button we just created
-      const saveBtn = item.querySelector('.save-button');
+        // Add event to list
+        eventListEl.appendChild(item);
 
-      // 3. Check Firebase: Is this already saved?
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        saveBtn.innerHTML = "<b>Saved!</b>";
-        saveBtn.style.background = "#28a745"; // Success Green
-        saveBtn.style.color = "white";
-      }
+        const saveBtn = item.querySelector('.save-button');
 
-      // 4. Add the Toggle Click Event
-      saveBtn.onclick = async () => {
-        const currentSnap = await getDoc(docRef);
-        
-        if (currentSnap.exists()) {
-          // If already saved, REMOVE it
-          await deleteDoc(docRef);
-          saveBtn.innerHTML = "<b>Save</b>";
-          saveBtn.style.background = ""; // Back to default
-          saveBtn.style.color = "";
-          console.log("Unsaved!");
-        } else {
-          // If not saved, ADD it
-          await setDoc(docRef, {
-            date: dateStr,
-            text: match.text,
-            time: match.time,
-            location: match.location,
-            group: match.group
-          });
+        // Check if event already saved
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
           saveBtn.innerHTML = "<b>Saved!</b>";
-          saveBtn.style.background = "#28a745";
+          saveBtn.style.background = "#28a745"; // Success Green
           saveBtn.style.color = "white";
-          console.log("Saved!");
         }
-      };
-    });
-  } else {
-    eventListEl.innerHTML = '<div class="no-events">No events scheduled.</div>';
-  }
-}
 
-  async function toggleSaveEvent(dateStr, matchText, matchTime, button) {
-  // Create a unique ID for this specific match (e.g., "2026-6-18-Canada-vs-Qatar")
-  const eventId = `${dateStr}-${matchText.replace(/\s+/g, '-')}`;
-  const docRef = db.collection("saved_events").doc(eventId);
+        // Save / unsave event
+        saveBtn.onclick = async () => {
+          const currentSnap = await getDoc(docRef);
+        
+          if (currentSnap.exists()) {
 
-  try {
-    const doc = await docRef.get();
+            // Remove saved event
+            await deleteDoc(docRef);
+            saveBtn.innerHTML = "<b>Save</b>";
+            saveBtn.style.background = ""; // Back to default
+            saveBtn.style.color = "";
+            console.log("Unsaved!");
+          } else {
 
-    if (doc.exists) {
-      // 1. If it exists, REMOVE it
-      await docRef.delete();
-      button.innerHTML = "⭐ Save Event";
-      button.style.background = "#007bff";
-      console.log("Removed from favorites");
-    } else {
-      // 2. If it doesn't exist, SAVE it
-      await docRef.set({
-        date: dateStr,
-        text: matchText,
-        time: matchTime,
-        savedAt: firebase.firestore.FieldValue.serverTimestamp()
+            // Save event
+            await setDoc(docRef, {
+              date: dateStr,
+              text: match.text,
+              time: match.time,
+              location: match.location,
+              group: match.group
+            });
+            saveBtn.innerHTML = "<b>Saved!</b>";
+            saveBtn.style.background = "#28a745";
+            saveBtn.style.color = "white";
+            console.log("Saved!");
+          }
+        };
       });
-      button.innerHTML = "🌟 Saved!";
-      button.style.background = "#28a745";
-      console.log("Saved to favorites!");
+    } else {
+      // Show message if no events exist
+      eventListEl.innerHTML = '<div class="no-events">No events scheduled.</div>';
     }
-  } catch (error) {
-    console.error("Error toggling save:", error);
-  }
   }
   
-  // Nav Handlers
+  // Navigation buttons
   prevMonthBtn.onclick = () => { currentDate.setMonth(currentDate.getMonth() - 1); renderCalendar(); };
   nextMonthBtn.onclick = () => { currentDate.setMonth(currentDate.getMonth() + 1); renderCalendar(); };
   todayBtn.onclick = () => { currentDate = new Date(); selectedDate = new Date(); fetchEvents(); };
 
+  // Open saved events page
   if (collectionBtn) {
     collectionBtn.onclick = () => {
       window.location.href = "favorite.html";
