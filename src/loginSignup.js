@@ -120,7 +120,7 @@ function initAuthUI() {
             console.error(err);
         } finally {
             setSubmitDisabled(signupForm, false);
-        }
+        
     });
 }
 
