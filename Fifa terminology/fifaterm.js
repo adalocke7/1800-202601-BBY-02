@@ -8,6 +8,18 @@ const searchInput = document.getElementById("searchInput");
 
 let allTerms = [];
 
+document.addEventListener("DOMContentLoaded", () => {
+  const backBtn = document.getElementById("backBtn");
+
+  backBtn.addEventListener("mouseenter", () => {
+    backBtn.src = "../images/back.gif";
+  });
+
+  backBtn.addEventListener("mouseleave", () => {
+    backBtn.src = "../images/back-static.png";
+  });
+});
+
 // Load terminology from Firestore
 async function loadTerms() {
   try {
