@@ -8,28 +8,6 @@ const searchInput = document.getElementById("searchInput");
 
 let allTerms = [];
 
-document.addEventListener("DOMContentLoaded", () => {
-  const backBtn = document.getElementById("backBtn");
-
-  const staticImg = "../images/back-static.png";
-  const gifImg = "../images/back.gif";
-
-  // Always reset image on load
-  backBtn.src = staticImg;
-
-  backBtn.addEventListener("mouseenter", () => {
-    backBtn.src = gifImg;
-  });
-
-  backBtn.addEventListener("mouseleave", () => {
-    backBtn.src = staticImg;
-  });
-
-  backBtn.addEventListener("click", () => {
-    backBtn.src = staticImg; // reset before leaving
-  });
-});
-
 // Load terminology from Firestore
 async function loadTerms() {
   try {
