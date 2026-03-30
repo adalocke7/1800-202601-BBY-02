@@ -20,7 +20,7 @@ class SiteNavbar extends HTMLElement {
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="./main.html">Home</a></li>
                             <li><a class="dropdown-item" href="./Fifa terminology/Fifaterm.html ">Termaninology</a></li>
-                            <li><a class="dropdown-item" href="./Calendar/calendar.html">Calendar</a></li>
+                            <li><a class="dropdown-item" href="./calendar.html">Calendar</a></li>
                             <li><a class="dropdown-item" href="./Quiz/quiz.html">Quiz</a></li>
                             <li><a class="dropdown-item" href="./Map/map.html">Map</a></li>
                         </ul>

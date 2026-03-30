@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Get the container where favorite events will be displayed
     const favoriteEvent = document.getElementById("favorite-events");
+    const backBtn = document.getElementById("back-button");
 
     // Check whether a user is logged in
     onAuthStateChanged(auth, async (user) => {
@@ -50,7 +51,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             // Insert event HTML structure
             item.innerHTML = `
                 <div class="event-color" style="background: #fd79a8;"></div>
-                <div class="event-time">${data.time}</div>
+                <div class="event-time"><b>${data.time}</b></div>
                 <div class="event-details">
                 <div class="team-information">
                 <div class="team">${data.text}</div>
@@ -82,4 +83,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         favoriteEvent.innerHTML = '<div class="no-events">Error loading events. Please try again.</div>';
     }
     });
+    if (backBtn) {
+    backBtn.onclick = () => {
+      window.history.back();
+    }
+  }
 });
+
