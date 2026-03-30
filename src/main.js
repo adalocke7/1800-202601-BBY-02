@@ -199,7 +199,5 @@ async function displayCardsDynamically(userUID) {
 
 const date = new Date();
 const day = date.getDate().toString();
-readQuote(day)
-console.log(day);
-
+readQuote(day);
 initFeedbackForm();

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="Stylesheet" href="./Map/map.css">
+    <script type="module" src="./src/components/site-navbar.js"></script>
+    <title>Map</title>
+</head>
+<body>
+
+    <div class="navbar item-c">
+    <site-navbar></site-navbar>
+    </div>
+
+    <div class="map-container item-a">
+        <div class=" px-4 py-5 text-center">
+            <h1 class="display-5 fw-bold">Welcome to the stadium map!</h1>
+            <div class="buttons">
+                <p class="lead mb-4">This is a map of the stadium where you can navigate and find your way around.</p>
+                <button id="Food">Food info</button>
+                <button id="Drinks">Drinks info</button>
+                <button id="KeyLocations">Key locations</button>
+                <button id="Washrooms">Washroom info</button>
+            </div>
+            <div id="info"></div>
+        </div>
+    </div>
+
+    <div class="map item-b">
+        <img src="./images/bc-stadium-map.png">
+    </div>
+
+
+
+    <script type="module" src="./Map/map.js"></script>
+    <script type="module" src="./src/main.js"></script>
+</body> 
+</html>
