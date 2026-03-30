@@ -2,8 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { db } from "./firebaseConfig.js";
-import { doc, onSnapshot } from "firebase/firestore";
-import { collection, getDocs, addDoc, serverTimestamp } from "firebase/firestore";
+import { doc, onSnapshot, collection, getDocs, addDoc, serverTimestamp } from "firebase/firestore";
  
 //--------------------------------------------------------------
 // If you have custom global styles, import them as well:
@@ -39,6 +38,8 @@ function initAuth() {
 
         const welcomeMessage = document.getElementById("welcomeMessage");
         if (welcomeMessage) welcomeMessage.textContent = `Hello, ${name}!`;
+
+        displayCardsDynamically(user.uid);
     });
 }
 
@@ -125,5 +126,80 @@ function showFeedbackMessage(message, type) {
         messageDiv.classList.remove("show");
     }, 5000);
 }
+
+function readQuote(day) {
+    const quoteDocRef = doc(db, "quotes", day);
+
+    onSnapshot(quoteDocRef, docSnap => {
+        if (docSnap.exists()) {
+            document.getElementById("quotes").innerHTML = docSnap.data().quote;
+        } else {
+            console.log("No such document");
+        }
+    }, (error) => {
+        console.error("Error listening to document: ", error);
+    });
+}
+
+async function displayCardsDynamically(userUID) {
+    const container = document.getElementById("matches-go-here");
+    const template = document.getElementById("matchesCardTemplate");
+    
+    // 1. Safety check: does the container exist on this page?
+    if (!container || !template) return;
+
+    try {
+        const querySnapshot = await getDocs(collection(db, "users", userUID, "saved_events"));
+        
+        // 2. Clear container so we don't double-up cards
+        container.innerHTML = "";
+
+        // 3. If no documents exist, just exit (shows nothing)
+        if (querySnapshot.empty) return;
+
+        document.getElementById("card-title").innerHTML = "<b><u>Your Saved Matches</u></b>";
+
+        querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            
+            // 4. Clone the template content
+            const clone = template.content.cloneNode(true);
+
+            // 5. Use querySelector on the CLONE, not the document
+            // This prevents "null" errors because it looks inside the new card
+            if (data.text) clone.querySelector(".title").textContent = data.text;
+            if (data.group) clone.querySelector(".group").innerHTML = `<b>Group: </b>${data.group}`;
+            if (data.date)  clone.querySelector(".date").textContent = data.date;
+            if (data.time)  clone.querySelector(".time").textContent = data.time;
+            if (data.location) clone.querySelector(".location").textContent = data.location;
+            
+            // Handle image if it exists
+            const img = clone.querySelector(".card-img-top");
+            if (data.image) {
+                img.src = `./images/${data.image}.png`;
+            } else {
+                img.style.display = 'none'; // Hide image if source is missing
+            }
+
+            const card = clone.querySelector(".card");
+            card.style.cursor = "pointer";
+            card.onclick = () => {
+            // Redirect to information.html with the ID in the URL
+            window.location.href = "information.html";
+};
+
+            // 6. Append the finished card to the page
+            container.appendChild(clone);
+        });
+
+    } catch (error) {
+        console.error("Error getting documents: ", error);
+    }
+}
+
+const date = new Date();
+const day = date.getDate().toString();
+readQuote(day)
+console.log(day);
 
 initFeedbackForm();

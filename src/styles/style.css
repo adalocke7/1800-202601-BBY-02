@@ -1,10 +1,20 @@
-.login-container {
+#index-page {
     background-image: url('../../images/Fifa.jpg');
     background-size: cover;
     height: 100vh;
     margin: 0;
     color: #facc15;
 }
+
+#login-page{
+    background-image: url('../../images/Fifa.jpg');
+    background-size: cover;
+    height: 100vh;
+    margin: 0;
+    color: #facc15;
+    backdrop-filter: blur(5px);
+}
+
 
 .navbar {
     background: linear-gradient(135deg, #0f172a, #1d4ed8);
@@ -73,3 +83,93 @@
     font-weight: 700;
     margin-bottom: 1.5rem;
 }
+
+.feedback-container .btn{
+    transition: 0.4s ease;
+}
+
+.feedback-container .btn:hover{
+    background: linear-gradient(135deg, #1d4ed8, #2563eb) !important
+}
+
+
+.quotes-go-here {
+  margin-top: 20px;
+  font-size: 18px;
+  font-family: "Playwrite NZ Basic", cursive;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.display-4{
+  font-family: "Playwrite NZ Basic", cursive;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Add a subtle lift effect when hovering over cards */
+.card {
+  margin: 20px;
+  height: 420px;
+  padding: 20px;
+  background: #f8f8f8;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.12) !important;
+}
+
+/* Ensure images fit nicely if used in dashboard cards */
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+#card-title{
+  text-align: center;
+  font-family: "Delius", cursive;
+  font-weight: 400;
+  font-style: normal;
+  justify-content: center;
+}
+
+u {
+  text-decoration: none;
+  background-image: linear-gradient(to right, #000000, #bababa);
+  background-repeat: no-repeat;
+  background-size: 100% 2px;
+  background-position: 0 100%;
+}
+
+#login-page .mb-3{
+  font-size: 40px;
+  font-family: "Delius";
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.gtranslate_wrapper{
+    position: sticky;
+}
+
+@media (max-width: 768px) {
+.card {
+  margin: 10px;
+  height: 420px;
+  padding: 20px;
+  background: #f8f8f8;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+}
+

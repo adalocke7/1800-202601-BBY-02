@@ -23,12 +23,8 @@ Source: https://github.com/WingsBRStudio/java...
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
   background: linear-gradient(135deg, #f5f7fa 0%, #dfe6e9 100%);
-  padding: 20px;
 }
 
 .container {
@@ -37,6 +33,20 @@ body {
   gap: 20px;
   max-width: 900px;
   width: 100%;
+  justify-content: center;
+  margin: 40px auto 100px auto;
+}
+
+#back-button{
+  width: 40px;
+  margin-top: 40px;
+  margin-left: 40px;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+#back-button:hover{
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 8px #facc15);
 }
 
 @media (min-width: 768px) {
@@ -236,6 +246,11 @@ body {
   width: 100%;
   max-width: 450px;
   height: fit-content;
+  transition: 0.3s ease;
+}
+
+.event-panel:hover {
+  transform: translateY(-2px);
 }
 
 .event-header {
@@ -334,7 +349,7 @@ body {
   font-weight: 500;
 }
 
-.btn-collection-btn:hover{
+.btn-collection:hover{
   transform: translateY(-2px);
   box-shadow: 0 5px 15px (rgba(0, 206, 201, 0.3));
 }

@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const eventDateEl = document.getElementById('event-date');
   const eventListEl = document.getElementById('event-list');
   const collectionBtn = document.getElementById('btn-collection');
+  const backBtn = document.getElementById('back-button');
   
   // Variables used for user session and calendar state
   let currentUser = null;
@@ -220,6 +221,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Save event
             await setDoc(docRef, {
+              image: match.image,
               date: dateStr,
               text: match.text,
               time: match.time,
@@ -247,7 +249,13 @@ document.addEventListener('DOMContentLoaded', function () {
   // Open saved events page
   if (collectionBtn) {
     collectionBtn.onclick = () => {
-      window.location.href = "favorite.html";
+      window.location.href = "/favorite.html";
+    }
+  }
+
+  if (backBtn) {
+    backBtn.onclick = () => {
+      window.history.back();
     }
   }
 

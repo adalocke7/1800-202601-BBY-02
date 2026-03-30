@@ -9,10 +9,13 @@ Source: https://github.com/WingsBRStudio/java...
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Calendar</title>
-  <link rel="stylesheet" href="calendar.css">
+  <link rel="stylesheet" href="./Calendar/calendar.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script type="module" src="./src/components/site-navbar.js"></script>
 </head>
 <body>
+  <site-navbar></site-navbar>
+    <img id="back-button" src="./images/Back.png" alt="Back">
   <div class="container">
     <div class="calendar-container">
       <div class="calendar-header">
@@ -37,7 +40,7 @@ Source: https://github.com/WingsBRStudio/java...
       
       <div class="calendar-footer">
         <button class="today-btn" id="today-btn"><i class="fas fa-calendar-day"></i> Today</button>
-        <button class="btn-collection" id="btn-collection" type="button"><p>Collection</p></button>
+        <button class="btn-collection" id="btn-collection" type="button">Collection</button>
         <div class="event-indicator">
           <i class="fas fa-circle" style="color: var(--accent); font-size: 0.6rem;"></i>
           <span>Has events</span>
@@ -57,7 +60,8 @@ Source: https://github.com/WingsBRStudio/java...
     </div>
   </div>
 
-<script type="module" src="../src/firebaseConfig.js"></script>
-<script type="module" src="calendar.js"></script>
+<script type="module" src="/src/firebaseConfig.js"></script>
+<script type="module" src="./Calendar/calendar.js"></script>
+<script type="module" src="./src/main.js"></script>
 </body>
 </html>
