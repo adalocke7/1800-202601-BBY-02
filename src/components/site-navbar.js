@@ -19,7 +19,7 @@ class SiteNavbar extends HTMLElement {
                         </button>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="./main.html">Home</a></li>
-                            <li><a class="dropdown-item" href="./Fifa terminology/Fifaterm.html ">Termaninology</a></li>
+                            <li><a class="dropdown-item" href="./Fifa terminology/Fifaterm.html ">Terminology</a></li>
                             <li><a class="dropdown-item" href="./calendar.html">Calendar</a></li>
                             <li><a class="dropdown-item" href="./Quiz/quiz.html">Quiz</a></li>
                             <li><a class="dropdown-item" href="./map.html">Map</a></li>
