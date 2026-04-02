@@ -111,8 +111,8 @@
 
 /* Add a subtle lift effect when hovering over cards */
 .card {
-  margin: 20px;
-  height: 420px;
+  margin: 10px;
+  height: 540px;
   padding: 20px;
   background: #f8f8f8;
   border: 2px solid transparent;
@@ -124,12 +124,12 @@
 .card:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0,0,0,0.12) !important;
+  text-decoration: underline;
+  color: rgb(1, 106, 186);
 }
 
-/* Ensure images fit nicely if used in dashboard cards */
-.card-img-top {
-  height: 200px;
-  object-fit: cover;
+.title{
+    font-size: 24px;
 }
 
 #card-title{
@@ -160,16 +160,54 @@ u {
     position: sticky;
 }
 
+.remove-btn{
+    transition: 0.4s ease;
+}
+
+.remove-btn:hover{
+    background: linear-gradient(135deg, #1d4ed8, #2563eb) !important
+}
+
+#matches-go-here .btn{
+    transition: 0.4s ease;
+}
+
+#matches-go-here .btn:hover{
+    background: linear-gradient(135deg, #1d4ed8, #2563eb) !important
+}
+
 @media (max-width: 768px) {
 .card {
   margin: 10px;
-  height: 420px;
-  padding: 20px;
+  height: 480px;
+  padding: 10px;
   background: #f8f8f8;
   border: 2px solid transparent;
   background-clip: padding-box;
   box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
+
+.title{
+    font-size: 17px;
+}
+
+.group, .date, .time, .location{
+    font-size: 14px;
+}
+
+.remove-btn{
+    margin-top: 20px;
+}
+
+#matches-go-here .col-12 p {
+        font-size: 18px; /* Slightly larger for readability */
+        line-height: 1.5;
+    }
+    
+#matches-go-here .btn {
+        width: 100%; /* Makes the button full-width on mobile for even easier tapping */
+        max-width: 300px; /* Prevents it from getting too huge on tablets */
+    }
 }
 

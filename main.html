@@ -33,21 +33,24 @@
     </div>
 
     <div class="container-fluid bg-light text-dark p-5">
-        <h1 id="card-title"></h1>
+        <h1 id="card-title"><b><u>Your Saved Matches</u></b></h1>
         <div id="matches-go-here" class="row justify-content-center">
         </div>
     </div>
 
     <template id="matchesCardTemplate">
-        <div class="card" style="width: 18rem;">
+        <div class="col-6 col-md-4 p-1">
+            <div class="card w-100">
             <img src="..." class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="title" style="text-align: center;"></h5>
                 <br>
                 <p><span class="group"></span></p>
-                <p><b>Date: </b><span class="date"></span></p>
-                <p><b>Time: </b><span class="time"></span></p>
-                <p><b>Location: </b><span class="location"></span></p>
+                <p><span class="date"></span></p>
+                <p><span class="time"></span></p>
+                <p><span class="location"></span></p>
+                <button class="btn btn-primary mt-auto remove-btn">Remove</button>
+            </div>
             </div>
         </div>
     </template>

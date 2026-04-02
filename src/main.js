@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { db } from "./firebaseConfig.js";
-import { doc, onSnapshot, collection, getDocs, addDoc, serverTimestamp } from "firebase/firestore";
+import { doc, onSnapshot, collection, deleteDoc, getDocs, addDoc, serverTimestamp } from "firebase/firestore";
  
 //--------------------------------------------------------------
 // If you have custom global styles, import them as well:
@@ -132,7 +132,12 @@ function readQuote(day) {
 
     onSnapshot(quoteDocRef, docSnap => {
         if (docSnap.exists()) {
-            document.getElementById("quotes").innerHTML = docSnap.data().quote;
+            const quotes = document.getElementById("quotes");
+            try {
+                quotes.innerHTML = docSnap.data().quote;
+            } catch (error) {
+                console.log();
+            }
         } else {
             console.log("No such document");
         }
@@ -149,29 +154,41 @@ async function displayCardsDynamically(userUID) {
     if (!container || !template) return;
 
     try {
+        const matches = document.getElementById("matches-go-here");
         const querySnapshot = await getDocs(collection(db, "users", userUID, "saved_events"));
         
         // 2. Clear container so we don't double-up cards
         container.innerHTML = "";
 
         // 3. If no documents exist, just exit (shows nothing)
-        if (querySnapshot.empty) return;
+        if (querySnapshot.empty) {
+            matches.innerHTML = `
+                <div class="col-12 text-center py-5 px-3">
+                <p class="mb-4" style="font-size: 1.1rem; color: #4b5563;">
+                    You haven't saved any matches yet!
+                </p>
+                <a href="calendar.html" class="btn btn-primary btn-lg px-4 shadow-sm">
+                    Find Upcoming Events
+                </a>
+                </div>
+            `;
+            return;
+        };
 
-        document.getElementById("card-title").innerHTML = "<b><u>Your Saved Matches</u></b>";
-
-        querySnapshot.forEach((doc) => {
-            const data = doc.data();
+        querySnapshot.forEach((docSnap) => {
+            const data = docSnap.data();
+            const eventID = docSnap.id;
             
             // 4. Clone the template content
             const clone = template.content.cloneNode(true);
 
             // 5. Use querySelector on the CLONE, not the document
             // This prevents "null" errors because it looks inside the new card
-            if (data.text) clone.querySelector(".title").textContent = data.text;
+            if (data.text) clone.querySelector(".title").innerHTML = data.text;
             if (data.group) clone.querySelector(".group").innerHTML = `<b>Group: </b>${data.group}`;
-            if (data.date)  clone.querySelector(".date").textContent = data.date;
-            if (data.time)  clone.querySelector(".time").textContent = data.time;
-            if (data.location) clone.querySelector(".location").textContent = data.location;
+            if (data.date)  clone.querySelector(".date").innerHTML = `<b>Date: </b>${data.date}`;
+            if (data.time)  clone.querySelector(".time").innerHTML = `<b>Time: </b>${data.time}`;
+            if (data.location) clone.querySelector(".location").innerHTML = `<b>Location: </b>${data.location}`;
             
             // Handle image if it exists
             const img = clone.querySelector(".card-img-top");
@@ -182,11 +199,41 @@ async function displayCardsDynamically(userUID) {
             }
 
             const card = clone.querySelector(".card");
+            const removeBtn = clone.querySelector(".remove-btn");
             card.style.cursor = "pointer";
             card.onclick = () => {
             // Redirect to information.html with the ID in the URL
-            window.location.href = "information.html";
-};
+                window.location.href = "information.html";
+            };
+            removeBtn.onclick = async (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                try {
+                    const decRef = doc(db, "users", userUID, "saved_events", eventID);
+                    await deleteDoc(decRef);
+
+                    const cardElement = e.target.closest(".col-6");
+                    if (cardElement) {
+                        cardElement.remove();
+                        if (matches.children.length === 0) {
+                            matches.innerHTML = `
+                                <div class="col-12 text-center py-5 px-3">
+                                <p class="mb-4" style="font-size: 1.1rem; color: #4b5563;">
+                                You haven't saved any matches yet!
+                                </p>
+                                <a href="calendar.html" class="btn btn-primary btn-lg px-4 shadow-sm">
+                                Find Upcoming Events
+                                </a>
+                                </div>
+                        `;
+            }
+                    }
+                } catch (error) {
+                    console.error("Error deleting document: ", error);
+                }
+            }
+            
 
             // 6. Append the finished card to the page
             container.appendChild(clone);
