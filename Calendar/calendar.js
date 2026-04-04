@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function () {
         item.className = 'event-item';
 
         // Unique ID for each match event
-        const eventId = `${dateStr}-${match.text.replace(/\s+/g, '-')}`;
+        const eventId = dateStr;
 
         // Firebase path for saved events
         const docRef = doc(db, "users", currentUser.uid, "saved_events", eventId);

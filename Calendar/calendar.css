@@ -44,11 +44,6 @@ body {
   transition: transform 0.2s ease, filter 0.2s ease;
 }
 
-#back-button:hover{
-  transform: scale(1.1);
-  filter: drop-shadow(0 0 8px #facc15);
-}
-
 @media (min-width: 768px) {
   .container {
     flex-direction: row;
@@ -66,11 +61,6 @@ body {
   transform-style: preserve-3d;
   perspective: 1000px;
   transition: all 0.3s ease;
-}
-
-.calendar-container:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
 }
 
 .calendar-header {
@@ -126,11 +116,6 @@ body {
   justify-content: center;
 }
 
-.nav-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: scale(1.1);
-}
-
 .weekdays {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -166,22 +151,22 @@ body {
   color: var(--dark);
 }
 
-.day:hover {
-  background: rgba(74, 107, 223, 0.1);
-  transform: scale(1.1);
-}
+  .day:hover {
+    background: rgba(74, 107, 223, 0.1);
+    transform: scale(1.1);
+  }
+
+  .day.selected {
+    background: var(--selected);
+    color: white;
+    font-weight: bold;
+    animation: pop 0.3s ease;
+  }
 
 .day.today {
   background: var(--today);
   color: white;
   font-weight: bold;
-}
-
-.day.selected {
-  background: var(--selected);
-  color: white;
-  font-weight: bold;
-  animation: pop 0.3s ease;
 }
 
 @keyframes pop {
@@ -199,8 +184,8 @@ body {
   content: '';
   position: absolute;
   bottom: 5px;
-  width: 5px;
-  height: 5px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: var(--accent);
 }
@@ -224,11 +209,6 @@ body {
   font-weight: 500;
 }
 
-.today-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 206, 201, 0.3);
-}
-
 .event-indicator {
   font-size: 0.8rem;
   color: var(--accent);
@@ -247,10 +227,6 @@ body {
   max-width: 450px;
   height: fit-content;
   transition: 0.3s ease;
-}
-
-.event-panel:hover {
-  transform: translateY(-2px);
 }
 
 .event-header {
@@ -283,10 +259,6 @@ body {
   gap: 12px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
   transition: transform 0.2s ease;
-}
-
-.event-item:hover {
-  transform: translateX(5px);
 }
 
 .event-color {
@@ -332,12 +304,6 @@ body {
   font-weight: 500;
 }
 
-.save-button:hover{
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 206, 201, 0.3);
-  opacity: 0.8;
-}
-
 .btn-collection{
   background: linear-gradient(135deg, var(--accent) 0%, #00b894 100%);
   color: white;
@@ -347,11 +313,6 @@ body {
   cursor: pointer;
   transition: all 0.3s ease;
   font-weight: 500;
-}
-
-.btn-collection:hover{
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px (rgba(0, 206, 201, 0.3));
 }
 
 header{
@@ -381,5 +342,46 @@ header{
   
   .event-date {
     font-size: 1.3rem;
+  }
+}
+
+@media (hover:hover){
+  #back-button:hover{
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 8px #facc15);
+  }
+
+  .calendar-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+  }
+
+  .nav-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+  }
+
+  .today-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 206, 201, 0.3);
+  }
+
+  .event-panel:hover {
+    transform: translateY(-2px);
+  }
+
+  .event-item:hover {
+    transform: translateX(5px);
+  }
+
+  .save-button:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 206, 201, 0.3);
+    opacity: 0.8;
+  }
+
+  .btn-collection:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px (rgba(0, 206, 201, 0.3));
   }
 }

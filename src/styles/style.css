@@ -68,10 +68,6 @@
     padding: 0.5rem 1.5rem;
 }
 
-.feedback-container .btn-primary:hover {
-    background: linear-gradient(135deg, #1d4ed8, #2563eb) !important;
-}
-
 .feedback-container .btn-secondary {
     background-color: #6c757d !important;
     border: none;
@@ -87,11 +83,6 @@
 .feedback-container .btn{
     transition: 0.4s ease;
 }
-
-.feedback-container .btn:hover{
-    background: linear-gradient(135deg, #1d4ed8, #2563eb) !important
-}
-
 
 .quotes-go-here {
   margin-top: 20px;
@@ -119,38 +110,6 @@
   background-clip: padding-box;
   box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.12) !important;
-  color: rgb(1, 106, 186);
-}
-
-.card:hover .title{
-    text-decoration: underline;
-}
-
-.card:hover .date{
-    text-decoration: underline;
-}
-
-.card:hover .time{
-    text-decoration: underline;
-}
-
-.card:hover .location{
-    text-decoration: underline;
-}
-
-.card:hover .group{
-    text-decoration: underline;
-}
-
-.card:hover #pin-btn{
-    opacity: 1;
-    transform: translateY(0); /* Slides down into its original position */
-    pointer-events: auto; 
 }
 
 .title{
@@ -191,10 +150,6 @@ u {
 
 .remove-btn{
     transition: 0.4s ease;
-}
-
-.remove-btn:hover{
-    background: linear-gradient(135deg, #1d4ed8, #2563eb) !important
 }
 
 #matches-go-here .btn{
@@ -244,16 +199,6 @@ u {
     transition: opacity 0.2s ease;
 }
 
-#pin-btn:hover::after{
-    visibility: visible;
-    opacity: 1;
-}
-
-#pin-btn:hover{
-    background: rgba(115, 115, 115, 0.078);
-    border: 1px rgba(115, 115, 115, 0.078) solid;
-}
-
 #information{
     font-size: 20px;
     padding: 40px;
@@ -261,6 +206,10 @@ u {
 
 .team-title{
     text-align: center;
+}
+
+p {
+  font-family: 'Lato', sans-serif;
 }
 
 @media (max-width: 768px) {
@@ -334,5 +283,60 @@ u {
     .team-content, .team-nickname, .team-confederation, .team-appearance, .team-best{
         padding-left: 20px;
     }
+}
+
+@media(hover:hover){
+    .feedback-container .btn-primary:hover {
+    background: linear-gradient(135deg, #1d4ed8, #2563eb) !important;
+}
+
+    .feedback-container .btn:hover{
+    background: linear-gradient(135deg, #1d4ed8, #2563eb) !important
+}
+
+    .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.12) !important;
+    color: rgb(1, 106, 186);
+}
+    .remove-btn:hover{
+    background: linear-gradient(135deg, #1d4ed8, #2563eb) !important
+}
+
+    .card:hover .title{
+    text-decoration: underline;
+}
+
+    .card:hover .date{
+    text-decoration: underline;
+}
+
+    .card:hover .time{
+    text-decoration: underline;
+}
+
+    .card:hover .location{
+    text-decoration: underline;
+}
+
+    .card:hover .group{
+    text-decoration: underline;
+}
+
+    .card:hover #pin-btn{
+    opacity: 1;
+    transform: translateY(0); /* Slides down into its original position */
+    pointer-events: auto; 
+}
+
+    #pin-btn:hover::after{
+    visibility: visible;
+    opacity: 1;
+}
+
+    #pin-btn:hover{
+    background: rgba(115, 115, 115, 0.078);
+    border: 1px rgba(115, 115, 115, 0.078) solid;
+}
 }
 

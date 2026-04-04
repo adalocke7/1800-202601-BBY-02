@@ -216,8 +216,13 @@ async function displayCardsDynamically(userUID) {
                 e.stopPropagation();
 
                 try {
-                    const docRef = doc(db, "users", userUID, "saved_events", eventID);
-                    await deleteDoc(docRef);
+                    const docRef1 = doc(db, "users", userUID, "saved_events", eventID);
+                    const docRef2 = collection(db, "users", userUID, "saved_events", eventID, "information");
+                    const docSnapshot = await getDocs(docRef2);
+                    for (const subDoc of docSnapshot.docs) {
+                        await deleteDoc(subDoc.ref);
+                    }
+                    await deleteDoc(docRef1);
 
                     const cardElement = e.target.closest(".col-6");
                     if (cardElement) {
