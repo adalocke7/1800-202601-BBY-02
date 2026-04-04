@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { db } from "./firebaseConfig.js";
-import { doc, onSnapshot, collection, deleteDoc, getDocs, addDoc, serverTimestamp } from "firebase/firestore";
+import { doc, orderBy, updateDoc, query, onSnapshot, collection, deleteDoc, getDocs, addDoc, serverTimestamp } from "firebase/firestore";
  
 //--------------------------------------------------------------
 // If you have custom global styles, import them as well:
@@ -155,7 +155,8 @@ async function displayCardsDynamically(userUID) {
 
     try {
         const matches = document.getElementById("matches-go-here");
-        const querySnapshot = await getDocs(collection(db, "users", userUID, "saved_events"));
+        const q = query(collection(db, "users", userUID, "saved_events"), orderBy("isPinned", "desc"), orderBy("createdAt", "desc"));
+        const querySnapshot = await getDocs(q);
         
         // 2. Clear container so we don't double-up cards
         container.innerHTML = "";
@@ -178,6 +179,9 @@ async function displayCardsDynamically(userUID) {
         querySnapshot.forEach((docSnap) => {
             const data = docSnap.data();
             const eventID = docSnap.id;
+
+            const isPinned = data.isPinned || false;
+            const createdAt = data.createdAt;
             
             // 4. Clone the template content
             const clone = template.content.cloneNode(true);
@@ -200,18 +204,20 @@ async function displayCardsDynamically(userUID) {
 
             const card = clone.querySelector(".card");
             const removeBtn = clone.querySelector(".remove-btn");
+            const pinBtn = clone.querySelector("#pin-btn");
+
             card.style.cursor = "pointer";
             card.onclick = () => {
             // Redirect to information.html with the ID in the URL
-                window.location.href = "information.html";
+                window.location.href = `information.html?eventID=${eventID}&userUID=${userUID}`;
             };
             removeBtn.onclick = async (e) => {
                 e.preventDefault();
                 e.stopPropagation();
 
                 try {
-                    const decRef = doc(db, "users", userUID, "saved_events", eventID);
-                    await deleteDoc(decRef);
+                    const docRef = doc(db, "users", userUID, "saved_events", eventID);
+                    await deleteDoc(docRef);
 
                     const cardElement = e.target.closest(".col-6");
                     if (cardElement) {
@@ -233,6 +239,31 @@ async function displayCardsDynamically(userUID) {
                     console.error("Error deleting document: ", error);
                 }
             }
+
+            if (isPinned) {
+                pinBtn.classList.add("active");
+            } else {
+                pinBtn.classList.remove("active");
+            }
+
+            pinBtn.onclick = async (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                try {
+                    const docRef = doc(db, "users", userUID, "saved_events", eventID);
+
+                    await updateDoc(docRef, {
+                        isPinned: !isPinned,
+                        createdAt: serverTimestamp()
+                    });
+
+                    displayCardsDynamically(userUID);
+                } catch (error) {
+                    console.error("Error toggling pin: ", error);
+                }
+            }
+
             
 
             // 6. Append the finished card to the page

@@ -226,8 +226,35 @@ document.addEventListener('DOMContentLoaded', function () {
               text: match.text,
               time: match.time,
               location: match.location,
-              group: match.group
+              group: match.group,
+              isPinned: match.isPinned,
+              createdAt: serverTimestamp()
             });
+
+            try {
+              const source = collection(db, "events", dateStr, "information");
+              const info = await getDocs(source);
+
+              const destination = collection(db, "users", currentUser.uid, "saved_events", eventId, "information");
+
+              info.forEach(async (infoDoc) => {
+                const data = infoDoc.data();
+                const infoID = infoDoc.id;
+
+                const newDocRef = doc(destination, infoID);
+
+                await setDoc(newDocRef, {
+                  nickname: data.nickname,
+                  appearance: data.appearance,
+                  confederation: data.confederation,
+                  best: data.best,
+                  content: data.content,
+                  title: data.title
+                })
+              })
+            } catch (error){
+              console.error("Error copying document: ", error);
+            }
             saveBtn.innerHTML = "<b>Saved!</b>";
             saveBtn.style.background = "#28a745";
             saveBtn.style.color = "white";

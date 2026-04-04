@@ -9,6 +9,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Delius&family=Playwrite+NZ+Basic:wght@100..400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=keep" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 
     <link rel="icon" type="image/png" href="./images/football.png">
 
@@ -39,21 +42,25 @@
     </div>
 
     <template id="matchesCardTemplate">
-        <div class="col-6 col-md-4 p-1">
-            <div class="card w-100">
+    <!-- Changed p-1 to px-1 (horizontal only) and added g-2 to the parent row (see below) -->
+    <div class="col-6 col-md-4 px-1 pb-2"> 
+        <div class="card w-100">
             <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
+            <div class="card-body d-flex flex-column">
                 <h5 class="title" style="text-align: center;"></h5>
-                <br>
-                <p><span class="group"></span></p>
-                <p><span class="date"></span></p>
-                <p><span class="time"></span></p>
-                <p><span class="location"></span></p>
-                <button class="btn btn-primary mt-auto remove-btn">Remove</button>
-            </div>
+                <p class="mb-1"><span class="group"></span></p>
+                <p class="mb-1"><span class="date"></span></p>
+                <p class="mb-1"><span class="time"></span></p>
+                <p class="mb-1"><span class="location"></span></p>
+                <div class="d-flex align-items-center justify-content-between mt-auto">
+                    <button class="btn btn-primary remove-btn">Remove</button>
+                    <span id="pin-btn" class="material-symbols-outlined">keep</span>
+                </div>
             </div>
         </div>
-    </template>
+    </div>
+</template>
+
 
     <div class="feedback-container">
         <div class="container bg-white p-5 rounded shadow-sm">
