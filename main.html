@@ -23,9 +23,26 @@
     <!------------------------------>
     <!-- Your HTML Layout go here -->
     <!------------------------------>
+    <video autoplay muted loop playsinline id="bg-video">
+        <source src="images/main-back.mp4" type="video/mp4">
+      </video>
 
     <!-- our own navbar goes here -->
-     <site-navbar></site-navbar>
+     <site-navbar>
+        <section class="hero-video">
+            <video autoplay muted loop playsinline class="hero-bg">
+              <source src="./images/Fifa-back.mp4" type="video/mp4">
+            </video>
+          
+            <div class="hero-overlay"></div>
+          
+            <div class="hero-content">
+              <h1>Upcoming Matches</h1>
+              <p>Experience football like never before</p>
+              <button class="hero-btn">Explore</button>
+            </div>
+          </section>
+     </site-navbar>
 
     <!-- Main content goes here -->
      <div class="container-fluid bg-light text-dark p-5">
@@ -36,7 +53,9 @@
     </div>
 
     <div class="container-fluid bg-light text-dark p-5">
-        <h1 id="card-title"><b><u>Your Saved Matches</u></b></h1>
+        <h1 id="card-title">Upcoming Matches</h1>
+        <p class="subtitle">Let's unite around the world.</p>
+        <button class="calendar-btn">Calendar →</button>
         <div id="matches-go-here" class="row justify-content-center">
         </div>
     </div>
@@ -60,10 +79,18 @@
         </div>
     </div>
 </template>
+    <h2 style="color:white;"> Quiz History</h2>
+    <div id="quiz-scores-go-here"></div>
+  </section>
 
 
-    <div class="feedback-container">
-        <div class="container bg-white p-5 rounded shadow-sm">
+<div class="feedback-toggle">
+    <button id="openFeedbackBtn" class="feedback-btn">
+      Give Feedback
+    </button>
+  
+    <div class="feedback-container hidden">
+        <div class="container transparent-section">
             <h2 class="mb-4">Share Your Feedback</h2>
             <form id="feedbackForm">
                 <div class="mb-3">
@@ -100,6 +127,7 @@
                 </div>
 
                 <div id="feedbackMessage" class="mt-3"></div>
+                <button type="button" id="closeFeedback" class="btn btn-danger">Close</button>
             </form>
         </div>
     </div>

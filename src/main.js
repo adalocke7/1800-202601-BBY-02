@@ -40,6 +40,7 @@ function initAuth() {
         if (welcomeMessage) welcomeMessage.textContent = `Hello, ${name}!`;
 
         displayCardsDynamically(user.uid);
+        displayQuizScores(user.uid);
     });
 }
 
@@ -279,8 +280,77 @@ async function displayCardsDynamically(userUID) {
         console.error("Error getting documents: ", error);
     }
 }
+const feedbackBtn = document.getElementById("openFeedbackBtn");
+const feedbackBox = document.querySelector(".feedback-container");
+
+if (feedbackBtn && feedbackBox) {
+  feedbackBtn.addEventListener("click", () => {
+    feedbackBox.classList.toggle("hidden");
+  });
+}
+document.getElementById("closeFeedback")?.addEventListener("click", () => {
+    feedbackBox.classList.add("hidden");
+  });
+
 
 const date = new Date();
 const day = date.getDate().toString();
 readQuote(day);
 initFeedbackForm();
+async function displayQuizScores(userUID) {
+    const container = document.getElementById("quiz-scores-go-here");
+
+    // safety check
+    if (!container) return;
+
+    try {
+        const q = query(
+            collection(db, "users", userUID, "quizScores"),
+            orderBy("date", "desc")
+        );
+
+        const snapshot = await getDocs(q);
+
+        container.innerHTML = "";
+
+        if (snapshot.empty) {
+            container.innerHTML = `
+                <p style="text-align:center; color:#94a3b8;">
+                    No quiz attempts yet ⚽
+                </p>
+            `;
+            return;
+        }
+
+        snapshot.forEach((docSnap) => {
+            const data = docSnap.data();
+
+            const card = document.createElement("div");
+            card.className = "card p-3 mb-2";
+
+            card.innerHTML = `
+            <div class="quiz-card">
+              <div class="quiz-header">
+                <span>⚽ Quiz Match</span>
+                <span class="percentage">${data.percentage}%</span>
+              </div>
+          
+              <div class="quiz-score">
+                <span class="team">YOU</span>
+                <span class="score">${data.score} - ${data.total}</span>
+                <span class="team">QUIZ</span>
+              </div>
+          
+              <div class="quiz-result ${data.percentage >= 70 ? "win" : "lose"}">
+                ${data.percentage >= 70 ? "🏆 WIN" : "❌ LOSS"}
+              </div>
+            </div>
+          `;
+
+            container.appendChild(card);
+        });
+
+    } catch (error) {
+        console.error("Error loading quiz scores:", error);
+    }
+}
