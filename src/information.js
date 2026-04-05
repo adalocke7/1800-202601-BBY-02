@@ -31,7 +31,7 @@ async function loadEventDetails(userUID, eventID) {
             
             const infoHtml = `
                 <div class="team-title"><h2><u>${data.title}</u><h2><br></div>
-                <div class="team-nickname"<p><b><i class="fa-solid fa-tag"></i>Nickname: </b>${data.nickname}</p></div>
+                <div class="team-nickname"><p><b><i class="fa-solid fa-tag"></i>Nickname: </b>${data.nickname}</p></div>
                 <div class="team-confederation"><p><b><i class="fa-solid fa-earth-americas"></i>Confederation: </b>${data.confederation}</p></div>
                 <div class="team-appearance"><p><b><i class="fa-solid fa-futbol"></i>World Cup Appearances: </b>${data.appearance}</p></div>
                 <div class="team-best"><p><b><i class="fa-solid fa-medal"></i>Best Result: </b>${data.best}</p></div>

@@ -11,13 +11,13 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   min-height: 100vh;
   background: linear-gradient(135deg, #f5f7fa 0%, #dfe6e9 100%);
   margin: 0;
 }
 
-header{
+header {
   background-color: var(--primary);
   width: 100%;
   text-align: center;
@@ -29,26 +29,28 @@ header{
   justify-content: center;
 }
 
-.navbar{
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
 }
 
-#back-button{
+#back-button {
   width: 40px;
   margin-top: 40px;
   margin-left: 40px;
-  transition: transform 0.2s ease, filter 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    filter 0.2s ease;
 }
 
-#back-button:hover{
+#back-button:hover {
   transform: scale(1.1);
   filter: drop-shadow(0 0 8px #facc15);
 }
 
-#favorite-events{
+#favorite-events {
   margin: 80px auto 40px auto;
   max-width: 500px;
   display: flex;
@@ -58,7 +60,7 @@ header{
   gap: 20px;
 }
 
-.event-item{
+.event-item {
   background: white;
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -70,11 +72,11 @@ header{
   transition: 0.3s ease;
 }
 
-.event-item:hover{
+.event-item:hover {
   transform: translateX(4px);
 }
 
-.save-button{
+.save-button {
   color: white;
   border: none;
   padding: 0.5rem 1rem;
@@ -84,16 +86,18 @@ header{
   font-weight: 500;
 }
 
-.save-button:hover{
+.save-button:hover {
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(0, 206, 201, 0.3);
 }
 
 @media (max-width: 767px) {
-  #back-button{
-  width: 25px;
-  margin-top: -115px;
-  margin-left: 40px;
-  transition: transform 0.2s ease, filter 0.2s ease;
-}
+  #back-button {
+    width: 25px;
+    margin-top: -115px;
+    margin-left: 40px;
+    transition:
+      transform 0.2s ease,
+      filter 0.2s ease;
+  }
 }

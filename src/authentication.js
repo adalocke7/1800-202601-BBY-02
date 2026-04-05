@@ -53,7 +53,11 @@ export async function loginUser(email, password) {
 //   const user = await signupUser("Alice", "alice@email.com", "secret");
 // -------------------------------------------------------------
 export async function signupUser(name, email, password) {
-  const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+  const userCredential = await createUserWithEmailAndPassword(
+    auth,
+    email,
+    password,
+  );
   await updateProfile(userCredential.user, { displayName: name });
   return userCredential.user;
 }
@@ -71,8 +75,6 @@ export async function logoutUser() {
   await signOut(auth);
   window.location.href = "index.html";
 }
-
-
 
 // -------------------------------------------------------------
 // authErrorMessage(error)
@@ -96,4 +98,3 @@ export function authErrorMessage(error) {
 
   return map[code] || "Something went wrong. Please try again.";
 }
-

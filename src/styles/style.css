@@ -1,89 +1,89 @@
 #index-page {
-    background-image: url('../../images/Fifa.jpg');
-    background-size: cover;
-    height: 100vh;
-    margin: 0;
-    color: #facc15;
+  background-image: url("../../images/Fifa.jpg");
+  background-size: cover;
+  height: 100vh;
+  margin: 0;
+  color: #facc15;
 }
 
-#login-page{
-    background-image: url('../../images/Fifa.jpg');
-    background-size: cover;
-    height: 100vh;
-    margin: 0;
-    color: #facc15;
-    backdrop-filter: blur(5px);
+#login-page {
+  background-image: url("../../images/Fifa.jpg");
+  background-size: cover;
+  height: 100vh;
+  margin: 0;
+  color: #facc15;
+  backdrop-filter: blur(5px);
 }
-
 
 .navbar {
-    background: linear-gradient(135deg, #0f172a, #1d4ed8);
-    border-color: #0f172a;
+  background: linear-gradient(135deg, #0f172a, #1d4ed8);
+  border-color: #0f172a;
 }
 
 .btn {
-    background-color: transparent !important;
-    color: #facc15 !important;
-    background: linear-gradient(135deg, #0f172a, #1d4ed8);
+  background-color: transparent !important;
+  color: #facc15 !important;
+  background: linear-gradient(135deg, #0f172a, #1d4ed8);
 }
 
 /* Feedback Form Styles */
 .feedback-container {
-    padding: 40px 0;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(10px);
-    border-radius: 16px;
+  padding: 40px 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
 }
 
 .feedback-container .form-control,
 .feedback-container .form-select {
-    border-color: #dee2e6;
-    border-radius: 0.375rem;
+  border-color: #dee2e6;
+  border-radius: 0.375rem;
 }
 
 .feedback-container .form-control:focus,
 .feedback-container .form-select:focus {
-    border-color: #1d4ed8;
-    box-shadow: 0 0 0 0.2rem rgba(29, 78, 216, 0.25);
+  border-color: #1d4ed8;
+  box-shadow: 0 0 0 0.2rem rgba(29, 78, 216, 0.25);
 }
 
 .feedback-container .form-label {
-    font-weight: 600;
-    color: #0f172a;
-    margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 0.5rem;
 }
 
 .feedback-container .text-danger {
-    color: #dc3545;
-    margin-left: 0.25rem;
+  color: #dc3545;
+  margin-left: 0.25rem;
 }
 
 .feedback-container .text-muted {
-    font-size: 0.875rem;
+  color: white !important;
+  font-size: 0.875rem;
 }
 
 .feedback-container .btn-primary {
-    background: linear-gradient(135deg, #0f172a, #1d4ed8) !important;
-    border: none;
-    color: white !important;
-    font-weight: 600;
-    padding: 0.5rem 1.5rem;
+  background: linear-gradient(135deg, #0f172a, #1d4ed8) !important;
+  border: none;
+  color: white !important;
+  font-weight: 600;
+  padding: 0.5rem 1.5rem;
 }
 
 .feedback-container .btn-secondary {
-    background-color: #6c757d !important;
-    border: none;
-    color: white !important;
+  background-color: #6c757d !important;
+  border: none;
+  color: white !important;
 }
 
 .feedback-container h2 {
-    color: #0f172a;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
+  color: white;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
 }
 
-.feedback-container .btn{
-    transition: 0.4s ease;
+.feedback-container .btn {
+  transition: 0.4s ease;
 }
 
 .quotes-go-here {
@@ -95,7 +95,7 @@
   font-style: normal;
 }
 
-.display-4{
+.display-4 {
   font-family: "Playwrite NZ Basic", cursive;
   font-optical-sizing: auto;
   font-weight: 700;
@@ -104,29 +104,31 @@
 
 /* Add a subtle lift effect when hovering over cards */
 .card {
-    margin: 10px;
-    height: 580px;
-    padding: 20px;
-  
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(10px);
-  
-    border-radius: 16px;
-    border: 1px solid rgba(255,255,255,0.1);
-  
-    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-  }
+  margin: 10px;
+  height: 580px;
+  padding: 20px;
 
-.title{
-    font-size: 26px;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  transition:
+    transform 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
 }
 
-.card p{
-    font-size: 17px;
+.title {
+  font-size: 26px;
 }
 
-#card-title{
+.card p {
+  font-size: 17px;
+}
+
+#card-title {
   text-align: center;
   font-family: "Delius", cursive;
   font-weight: 400;
@@ -136,13 +138,13 @@
 
 u {
   text-decoration: none;
-  background-image: linear-gradient(to right, #000000, #bababa);
+  background-image: linear-gradient(to right, #000000, #ffffff);
   background-repeat: no-repeat;
   background-size: 100% 2px;
   background-position: 0 100%;
 }
 
-#login-page .mb-3{
+#login-page .mb-3 {
   font-size: 40px;
   font-family: "Delius";
   font-optical-sizing: auto;
@@ -150,443 +152,470 @@ u {
   font-style: normal;
 }
 
-.gtranslate_wrapper{
-    position: sticky;
+.gtranslate_wrapper {
+  position: sticky;
 }
 
-.remove-btn{
-    transition: 0.4s ease;
+.remove-btn {
+  transition: 0.4s ease;
 }
 
-#matches-go-here .btn{
-    transition: 0.4s ease;
+#matches-go-here .btn {
+  transition: 0.4s ease;
 }
 
-#matches-go-here .btn:hover{
-    background: linear-gradient(135deg, #1d4ed8, #2563eb) !important
+#matches-go-here .btn:hover {
+  background: linear-gradient(135deg, #1d4ed8, #2563eb) !important;
 }
 
-#pin-btn{
-    text-decoration: none;
-    padding: 8px;
-    color: black;
-    font-size: 29px;
-    border: 1px transparent solid;
-    border-radius: 8px;
-    transition: color 0.3s, transform 0.2s;
-    opacity: 1;
-    cursor: pointer;
-    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
-    margin-left: auto;
-    text-align: center;
+#pin-btn {
+  position: relative;
+  text-decoration: none;
+  padding: 8px;
+  color: white;
+  font-size: 29px;
+  border: 1px transparent solid;
+  border-radius: 8px;
+  transition:
+    color 0.3s,
+    transform 0.2s;
+  opacity: 1;
+  cursor: pointer;
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 48;
+  margin-left: auto;
+  text-align: center;
 }
 
-#pin-btn.active{
-    color: #e8ae00;
-    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48;
-    transform: scale(1.1);
+#pin-btn.active {
+  color: #e8ae00;
+  font-variation-settings:
+    "FILL" 1,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 48;
+  transform: scale(1.1);
 }
 
-#pin-btn::after{
-    content: "Pin";
-    position: absolute;
-    bottom: 125%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #333;
-    color: #fff;
-    padding: 5px 10px;
-    padding-bottom: 10px;
-    border-radius: 4px;
-    font-size: 12px;
-    white-space: nowrap;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.2s ease;
+#pin-btn::after {
+  content: "Pin";
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: #fff;
+  padding: 5px 10px;
+  font-family: serif;
+  padding-bottom: 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease;
 }
 
-#information{
-    font-size: 20px;
-    padding: 40px;
+#pin-btn.active::after {
+  content: "Unpin";
 }
 
-.team-title{
-    text-align: center;
+#information {
+  font-size: 20px;
+  padding: 40px;
+}
+
+.team-title {
+  text-align: center;
 }
 
 p {
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
 }
 
 @media (max-width: 768px) {
-    @media (max-width: 768px) {
-        .card {
-          margin: 0 !important; 
-          width: 100%;
-          height: 380px;
-          padding: 8px;
-        
-          background: rgba(0, 0, 0, 0.4);
-          backdrop-filter: blur(10px);
-        
-          border-radius: 16px;
-        }
-        }
+  @media (max-width: 768px) {
+    .card {
+      margin: 0 !important;
+      width: 100%;
+      height: 380px;
+      padding: 8px;
 
-.card-body {
-    padding: 0.5rem; 
-}
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(10px);
 
-.title{
+      border-radius: 16px;
+    }
+  }
+
+  .card-body {
+    padding: 0.5rem;
+  }
+
+  .title {
     font-size: 17px;
-}
+  }
 
-.group, .date, .time, .location{
+  .group,
+  .date,
+  .time,
+  .location {
     font-size: 13px;
-}
+  }
 
-.remove-btn{
+  .remove-btn {
     margin-top: 20px;
-}
+  }
 
-#matches-go-here .col-12 p {
-        font-size: 18px; /* Slightly larger for readability */
-        line-height: 1.5;
-    }
-    
-    #matches-go-here .btn {
-        width: auto !important; /* Overrides the previous 100% width */
-        max-width: none; 
-        padding: 6px 12px; /* Smaller padding for mobile */
-        font-size: 14px;   /* Consistent text size */
-        margin-top: 0;     /* Remove that 20px top margin so it stays aligned with pin */
-    }
+  #matches-go-here .col-12 p {
+    font-size: 18px; /* Slightly larger for readability */
+    line-height: 1.5;
+  }
 
-    /* 2. Ensure the container doesn't stack elements */
-    .d-flex.align-items-center.justify-content-between {
-        flex-direction: row !important; /* Forces side-by-side */
-        display: flex !important;
-        align-items: center;
-        gap: 8px; /* Adds a small gap between them */
-    }
+  #matches-go-here .btn {
+    width: auto !important; /* Overrides the previous 100% width */
+    max-width: none;
+    padding: 6px 12px; /* Smaller padding for mobile */
+    font-size: 14px; /* Consistent text size */
+    margin-top: 0; /* Remove that 20px top margin so it stays aligned with pin */
+  }
 
-    /* 3. Keep pin size consistent */
-    #pin-btn {
-        font-size: 24px !important;
-        padding: 8px;
-        margin-left: 0; /* Remove auto-margin if you want them close together */
-    }
+  /* 2. Ensure the container doesn't stack elements */
+  .d-flex.align-items-center.justify-content-between {
+    flex-direction: row !important; /* Forces side-by-side */
+    display: flex !important;
+    align-items: center;
+    gap: 8px; /* Adds a small gap between them */
+  }
 
-    /* Optional: If the "Remove" button still feels too big, 
+  /* 3. Keep pin size consistent */
+  #pin-btn {
+    font-size: 24px !important;
+    padding: 8px;
+    margin-left: 0; /* Remove auto-margin if you want them close together */
+  }
+
+  /* Optional: If the "Remove" button still feels too big, 
        you can manually tighten its padding further */
-    .remove-btn {
-        padding: 0.25rem 0.5rem;
-        font-size: 0.875rem;
-    }
+  .remove-btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+  }
 
-    #information{
-        padding: 20px;
-    }
+  #information {
+    padding: 20px;
+  }
 
-    .team-content, .team-nickname, .team-confederation, .team-appearance, .team-best{
-        padding-left: 20px;
-    }
+  .team-content,
+  .team-nickname,
+  .team-confederation,
+  .team-appearance,
+  .team-best {
+    padding-left: 20px;
+  }
 }
 
-@media(hover:hover){
-    .feedback-container .btn-primary:hover {
+@media (hover: hover) {
+  .feedback-container .btn-primary:hover {
     background: linear-gradient(135deg, #1d4ed8, #2563eb) !important;
-}
+  }
 
-    .feedback-container .btn:hover{
-    background: linear-gradient(135deg, #1d4ed8, #2563eb) !important
-}
+  .feedback-container .btn:hover {
+    background: linear-gradient(135deg, #1d4ed8, #2563eb) !important;
+  }
 
-    .card:hover {
+  .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.12) !important;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12) !important;
     color: rgb(1, 106, 186);
-}
-    .remove-btn:hover{
-    background: linear-gradient(135deg, #1d4ed8, #2563eb) !important
-}
+  }
+  .remove-btn:hover {
+    background: linear-gradient(135deg, #1d4ed8, #2563eb) !important;
+  }
 
-    .card:hover .title{
+  .card:hover .title {
     text-decoration: underline;
-}
+  }
 
-    .card:hover .date{
+  .card:hover .date {
     text-decoration: underline;
-}
+  }
 
-    .card:hover .time{
+  .card:hover .time {
     text-decoration: underline;
-}
+  }
 
-    .card:hover .location{
+  .card:hover .location {
     text-decoration: underline;
-}
+  }
 
-    .card:hover .group{
+  .card:hover .group {
     text-decoration: underline;
-}
+  }
 
-    .card:hover #pin-btn{
+  .card:hover #pin-btn {
     opacity: 1;
-    transform: translateY(0); /* Slides down into its original position */
-    pointer-events: auto; 
-}
+    pointer-events: auto;
+  }
 
-    #pin-btn:hover::after{
+  #pin-btn:hover::after {
     visibility: visible;
     opacity: 1;
-}
+  }
 
-    #pin-btn:hover{
+  #pin-btn:hover {
     background: rgba(115, 115, 115, 0.078);
     border: 1px rgba(115, 115, 115, 0.078) solid;
-}
+  }
 }
 /* ============================= */
 /*  HERO VIDEO SECTION */
 /* ============================= */
 
 .hero-video {
-    position: relative;
-    height: 70vh;
-    overflow: hidden;
+  position: relative;
+  height: 70vh;
+  overflow: hidden;
+}
+
+/* VIDEO BACKGROUND */
+.hero-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* DARK OVERLAY */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.3),
+    rgba(0, 0, 0, 0.9)
+  );
+}
+
+/* CONTENT */
+.hero-content {
+  position: absolute;
+  bottom: 30px;
+  left: 20px;
+  z-index: 2;
+  color: white;
+}
+
+.hero-content h1 {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.hero-content p {
+  font-size: 14px;
+  opacity: 0.8;
+  margin-bottom: 15px;
+}
+
+/* BUTTON */
+.hero-btn {
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  transition: 0.3s;
+}
+
+.hero-btn:hover {
+  background: white;
+  color: black;
+}
+
+/* ============================= */
+/*  MOBILE OPTIMIZATION */
+/* ============================= */
+
+@media (min-width: 768px) {
+  .hero-video {
+    height: 80vh;
   }
-  
-  /* VIDEO BACKGROUND */
-  .hero-bg {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  /* DARK OVERLAY */
-  .hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.9));
-  }
-  
-  /* CONTENT */
-  .hero-content {
-    position: absolute;
-    bottom: 30px;
-    left: 20px;
-    z-index: 2;
-    color: white;
-  }
-  
+
   .hero-content h1 {
-    font-size: 28px;
-    font-weight: 700;
+    font-size: 48px;
   }
-  
+
   .hero-content p {
-    font-size: 14px;
-    opacity: 0.8;
-    margin-bottom: 15px;
+    font-size: 18px;
   }
-  
-  /* BUTTON */
-  .hero-btn {
-    background: transparent;
-    border: 1px solid white;
-    color: white;
-    padding: 8px 16px;
-    border-radius: 20px;
-    transition: 0.3s;
-  }
-  
-  .hero-btn:hover {
-    background: white;
-    color: black;
-  }
-  
-  /* ============================= */
-  /*  MOBILE OPTIMIZATION */
-  /* ============================= */
-  
-  @media (min-width: 768px) {
-    .hero-video {
-      height: 80vh;
-    }
-  
-    .hero-content h1 {
-      font-size: 48px;
-    }
-  
-    .hero-content p {
-      font-size: 18px;
-    }
-  }
-  .event-card .card-body {
-    background: rgba(0,0,0,0.4);
-    backdrop-filter: blur(10px);
-    border-radius: 12px;
-  }
-  /* ============================= */
+}
+.event-card .card-body {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+}
+/* ============================= */
 /* FEEDBACK TOGGLE BUTTON */
 /* ============================= */
 
 .feedback-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: linear-gradient(135deg, #1d4ed8, #2563eb);
-    color: white;
-    border: none;
-    padding: 12px 18px;
-    border-radius: 25px;
-    font-size: 14px;
-    font-weight: 600;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-    z-index: 999;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #1d4ed8, #2563eb);
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+}
+
+/* ============================= */
+/* HIDDEN FORM */
+/* ============================= */
+
+.feedback-container.hidden {
+  display: none;
+}
+
+/* Popup style */
+.feedback-container {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 90%;
+  max-width: 400px;
+  z-index: 998;
+}
+
+/* Smooth animation */
+.feedback-container .container {
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
   }
-  
-  /* ============================= */
-  /* HIDDEN FORM */
-  /* ============================= */
-  
-  .feedback-container.hidden {
-    display: none;
+  to {
+    transform: translateY(0);
+    opacity: 1;
   }
-  
-  /* Popup style */
-  .feedback-container {
-    position: fixed;
-    bottom: 80px;
-    right: 20px;
-    width: 90%;
-    max-width: 400px;
-    z-index: 998;
-  }
-  
-  /* Smooth animation */
-  .feedback-container .container {
-    animation: slideUp 0.3s ease;
-  }
-  
-  @keyframes slideUp {
-    from {
-      transform: translateY(40px);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-  .scores {
-    margin-top: 20px;
-  }
-  
-  .score-card {
-    background: rgba(2, 6, 23, 0.5);
-    border: 1px solid rgba(148, 163, 184, 0.2);
-    padding: 12px;
-    border-radius: 12px;
-    margin-bottom: 10px;
-    text-align: center;
-  }
-  .quiz-card {
-    background: linear-gradient(135deg, #0f172a, #1e293b);
-    border-radius: 16px;
-    padding: 16px;
-    margin-bottom: 12px;
-    color: white;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-    transition: transform 0.2s ease;
-  }
-  
-  .quiz-card:hover {
-    transform: scale(1.02);
-  }
-  
-  .quiz-header {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.9rem;
-    color: #94a3b8;
-    margin-bottom: 10px;
-  }
-  
-  .percentage {
-    font-weight: bold;
-    color: #38bdf8;
-  }
-  
-  .quiz-score {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 1.3rem;
-    margin-bottom: 10px;
-  }
-  
-  .team {
-    font-size: 0.8rem;
-    color: #94a3b8;
-  }
-  
-  .score {
-    font-weight: bold;
-    font-size: 1.5rem;
-  }
-  
-  .quiz-result {
-    text-align: center;
-    font-weight: bold;
-    padding: 6px;
-    border-radius: 10px;
-  }
-  
-  .quiz-result.win {
-    background: rgba(34, 197, 94, 0.2);
-    color: #22c55e;
-  }
-  
-  .quiz-result.lose {
-    background: rgba(239, 68, 68, 0.2);
-    color: #ef4444;
-  }
-  /* ===== VIDEO BACKGROUND ===== */
+}
+.scores {
+  margin-top: 20px;
+}
+
+.score-card {
+  background: rgba(2, 6, 23, 0.5);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  padding: 12px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.quiz-card {
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 12px;
+  color: white;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease;
+}
+
+.quiz-card:hover {
+  transform: scale(1.02);
+}
+
+.quiz-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: #94a3b8;
+  margin-bottom: 10px;
+}
+
+.percentage {
+  font-weight: bold;
+  color: #38bdf8;
+}
+
+.quiz-score {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.team {
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+.score {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.quiz-result {
+  text-align: center;
+  font-weight: bold;
+  padding: 6px;
+  border-radius: 10px;
+}
+
+.quiz-result.win {
+  background: rgba(34, 197, 94, 0.2);
+  color: #22c55e;
+}
+
+.quiz-result.lose {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+/* ===== VIDEO BACKGROUND ===== */
 #bg-video {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -2;
-  }
-  
-  /* Dark overlay for readability */
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: -1;
-  }
-  
-  /* Make content readable */
-  body {
-    background: transparent;
-  }
-  .wrap, .card {
-    backdrop-filter: blur(10px);
-    background: rgba(0, 0, 0, 0.4);
-    border-radius: 16px;
-  }
-  .transparent-section {
-    background: transparent !important;
-  }
-  .container,
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+
+/* Dark overlay for readability */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: -1;
+}
+
+/* Make content readable */
+body {
+  background: transparent;
+}
+.wrap,
+.card {
+  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 16px;
+}
+.transparent-section {
+  background: transparent !important;
+}
+.container,
 .container-fluid,
 .row,
 .bg-light,
@@ -599,20 +628,23 @@ p {
   color: white !important;
 }
 section {
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(10px);
-    border-radius: 16px;
-    margin-bottom: 20px;
-    padding: 20px;
-  }
-  /* Headings */
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+/* Headings */
 .display-4,
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   color: white !important;
 }
 
 /* Paragraph text */
-p, .quotes-go-here {
+p,
+.quotes-go-here {
   color: #e5e7eb !important;
 }
 
@@ -620,9 +652,13 @@ p, .quotes-go-here {
 .card,
 .card p,
 .card .title,
-.group, .date, .time, .location {
+.group,
+.date,
+.time,
+.location {
   color: white !important;
 }
-h1, h2 {
-    text-shadow: 0 0 10px rgba(255,255,255,0.3);
-  }
+h1,
+h2 {
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}

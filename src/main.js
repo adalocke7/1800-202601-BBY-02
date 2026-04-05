@@ -1,15 +1,24 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { db } from "./firebaseConfig.js";
-import { doc, orderBy, updateDoc, query, onSnapshot, collection, deleteDoc, getDocs, addDoc, serverTimestamp } from "firebase/firestore";
- 
+import {
+  doc,
+  orderBy,
+  updateDoc,
+  query,
+  onSnapshot,
+  collection,
+  deleteDoc,
+  getDocs,
+  addDoc,
+  serverTimestamp,
+} from "firebase/firestore";
+
 //--------------------------------------------------------------
 // If you have custom global styles, import them as well:
 //--------------------------------------------------------------
-import './styles/style.css';
-
-
+import "./styles/style.css";
 
 //--------------------------------------------------------------
 // Custom global JS code (shared with all pages)can go here.
@@ -17,31 +26,33 @@ import './styles/style.css';
 
 // auth.js - one single source of truth
 function initAuth() {
-    const auth = getAuth();
+  const auth = getAuth();
 
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-        unsubscribe(); // only run once
+  const unsubscribe = onAuthStateChanged(auth, (user) => {
+    unsubscribe(); // only run once
 
-        if (!user) {
-            if (window.location.pathname.endsWith("main.html")) {
-                window.location.href = "index.html";
-                window.alert("You are not logged in. Please log in to access the site.");
-            }
-            return;
-        }
+    if (!user) {
+      if (window.location.pathname.endsWith("main.html")) {
+        window.location.href = "index.html";
+        window.alert(
+          "You are not logged in. Please log in to access the site.",
+        );
+      }
+      return;
+    }
 
-        // Update any name elements that exist on the current page
-        const name = user.displayName || user.email;
-        
-        const nameElement = document.getElementById("name-goes-here");
-        if (nameElement) nameElement.textContent = `${name}!`;
+    // Update any name elements that exist on the current page
+    const name = user.displayName || user.email;
 
-        const welcomeMessage = document.getElementById("welcomeMessage");
-        if (welcomeMessage) welcomeMessage.textContent = `Hello, ${name}!`;
+    const nameElement = document.getElementById("name-goes-here");
+    if (nameElement) nameElement.textContent = `${name}!`;
 
-        displayCardsDynamically(user.uid);
-        displayQuizScores(user.uid);
-    });
+    const welcomeMessage = document.getElementById("welcomeMessage");
+    if (welcomeMessage) welcomeMessage.textContent = `Hello, ${name}!`;
+
+    displayCardsDynamically(user.uid);
+    displayQuizScores(user.uid);
+  });
 }
 
 initAuth();
@@ -50,121 +61,137 @@ initAuth();
 // Feedback Form Handler
 //--------------------------------------------------------------
 function initFeedbackForm() {
-    const feedbackForm = document.getElementById("feedbackForm");
-    if (!feedbackForm) return; // Form not on this page
+  const feedbackForm = document.getElementById("feedbackForm");
+  if (!feedbackForm) return; // Form not on this page
 
-    const auth = getAuth();
-    
-    feedbackForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
+  const auth = getAuth();
 
-        // Get current user
-        const user = auth.currentUser;
-        if (!user) {
-            showFeedbackMessage("Error: You must be logged in to submit feedback.", "danger");
-            return;
-        }
+  feedbackForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-        // Get form values
-        const email = document.getElementById("feedbackEmail").value.trim();
-        const subject = document.getElementById("feedbackSubject").value.trim();
-        const rating = document.getElementById("feedbackRating").value;
-        const feedbackText = document.getElementById("feedbackText").value.trim();
+    // Get current user
+    const user = auth.currentUser;
+    if (!user) {
+      showFeedbackMessage(
+        "Error: You must be logged in to submit feedback.",
+        "danger",
+      );
+      return;
+    }
 
-        // Validate
-        if (!email || !subject || !rating || !feedbackText) {
-            showFeedbackMessage("Please fill in all required fields.", "warning");
-            return;
-        }
+    // Get form values
+    const email = document.getElementById("feedbackEmail").value.trim();
+    const subject = document.getElementById("feedbackSubject").value.trim();
+    const rating = document.getElementById("feedbackRating").value;
+    const feedbackText = document.getElementById("feedbackText").value.trim();
 
-        // Disable submit button during submission
-        const submitBtn = feedbackForm.querySelector("button[type='submit']");
-        const originalText = submitBtn.textContent;
-        submitBtn.disabled = true;
-        submitBtn.textContent = "Submitting...";
+    // Validate
+    if (!email || !subject || !rating || !feedbackText) {
+      showFeedbackMessage("Please fill in all required fields.", "warning");
+      return;
+    }
 
-        try {
-            // Add feedback to Firestore
-            const feedbackRef = collection(db, "feedback");
-            await addDoc(feedbackRef, {
-                userId: user.uid,
-                userEmail: user.email,
-                userName: user.displayName || "Anonymous",
-                customerEmail: email,
-                subject: subject,
-                rating: parseInt(rating),
-                feedback: feedbackText,
-                timestamp: serverTimestamp(),
-                status: "new"
-            });
+    // Disable submit button during submission
+    const submitBtn = feedbackForm.querySelector("button[type='submit']");
+    const originalText = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Submitting...";
 
-            // Success message
-            showFeedbackMessage("Thank you! Your feedback has been submitted successfully.", "success");
-            feedbackForm.reset();
+    try {
+      // Add feedback to Firestore
+      const feedbackRef = collection(db, "feedback");
+      await addDoc(feedbackRef, {
+        userId: user.uid,
+        userEmail: user.email,
+        userName: user.displayName || "Anonymous",
+        customerEmail: email,
+        subject: subject,
+        rating: parseInt(rating),
+        feedback: feedbackText,
+        timestamp: serverTimestamp(),
+        status: "new",
+      });
 
-        } catch (error) {
-            console.error("Error submitting feedback:", error);
-            showFeedbackMessage("Error submitting feedback. Please try again.", "danger");
-        } finally {
-            submitBtn.disabled = false;
-            submitBtn.textContent = originalText;
-        }
-    });
+      // Success message
+      showFeedbackMessage(
+        "Thank you! Your feedback has been submitted successfully.",
+        "success",
+      );
+      feedbackForm.reset();
+    } catch (error) {
+      console.error("Error submitting feedback:", error);
+      showFeedbackMessage(
+        "Error submitting feedback. Please try again.",
+        "danger",
+      );
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalText;
+    }
+  });
 }
 
 function showFeedbackMessage(message, type) {
-    const messageDiv = document.getElementById("feedbackMessage");
-    if (!messageDiv) return;
+  const messageDiv = document.getElementById("feedbackMessage");
+  if (!messageDiv) return;
 
-    messageDiv.className = `alert alert-${type} alert-dismissible fade show`;
-    messageDiv.innerHTML = `
+  messageDiv.className = `alert alert-${type} alert-dismissible fade show`;
+  messageDiv.innerHTML = `
         ${message}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     `;
 
-    // Auto-dismiss after 5 seconds
-    setTimeout(() => {
-        messageDiv.classList.remove("show");
-    }, 5000);
+  // Auto-dismiss after 5 seconds
+  setTimeout(() => {
+    messageDiv.classList.remove("show");
+  }, 5000);
 }
 
 function readQuote(day) {
-    const quoteDocRef = doc(db, "quotes", day);
+  const quoteDocRef = doc(db, "quotes", day);
 
-    onSnapshot(quoteDocRef, docSnap => {
-        if (docSnap.exists()) {
-            const quotes = document.getElementById("quotes");
-            try {
-                quotes.innerHTML = docSnap.data().quote;
-            } catch (error) {
-                console.log();
-            }
-        } else {
-            console.log("No such document");
+  onSnapshot(
+    quoteDocRef,
+    (docSnap) => {
+      if (docSnap.exists()) {
+        const quotes = document.getElementById("quotes");
+        try {
+          quotes.innerHTML = docSnap.data().quote;
+        } catch (error) {
+          console.log();
         }
-    }, (error) => {
-        console.error("Error listening to document: ", error);
-    });
+      } else {
+        console.log("No such document");
+      }
+    },
+    (error) => {
+      console.error("Error listening to document: ", error);
+    },
+  );
 }
 
 async function displayCardsDynamically(userUID) {
-    const container = document.getElementById("matches-go-here");
-    const template = document.getElementById("matchesCardTemplate");
-    
-    // 1. Safety check: does the container exist on this page?
-    if (!container || !template) return;
+  const container = document.getElementById("matches-go-here");
+  const template = document.getElementById("matchesCardTemplate");
 
-    try {
-        const matches = document.getElementById("matches-go-here");
-        const q = query(collection(db, "users", userUID, "saved_events"), orderBy("isPinned", "desc"), orderBy("createdAt", "desc"));
-        const querySnapshot = await getDocs(q);
-        
-        // 2. Clear container so we don't double-up cards
-        container.innerHTML = "";
+  // 1. Safety check: does the container exist on this page?
+  if (!container || !template) return;
 
-        // 3. If no documents exist, just exit (shows nothing)
-        if (querySnapshot.empty) {
-            matches.innerHTML = `
+  try {
+    const matches = document.getElementById("matches-go-here");
+    const q = query(
+      collection(db, "users", userUID, "saved_events"),
+      orderBy("isPinned", "desc"),
+      orderBy("createdAt", "desc"),
+    );
+    const querySnapshot = await getDocs(q);
+
+    // 2. Clear container so we don't double-up cards
+    container.innerHTML = "";
+
+    // 3. If no documents exist, just exit (shows nothing)
+    if (querySnapshot.empty) {
+      matches.innerHTML = `
                 <div class="col-12 text-center py-5 px-3">
                 <p class="mb-4" style="font-size: 1.1rem; color: #4b5563;">
                     You haven't saved any matches yet!
@@ -174,62 +201,74 @@ async function displayCardsDynamically(userUID) {
                 </a>
                 </div>
             `;
-            return;
-        };
+      return;
+    }
 
-        querySnapshot.forEach((docSnap) => {
-            const data = docSnap.data();
-            const eventID = docSnap.id;
+    querySnapshot.forEach((docSnap) => {
+      const data = docSnap.data();
+      const eventID = docSnap.id;
 
-            const isPinned = data.isPinned || false;
-            const createdAt = data.createdAt;
-            
-            // 4. Clone the template content
-            const clone = template.content.cloneNode(true);
+      const isPinned = data.isPinned || false;
+      const createdAt = data.createdAt;
 
-            // 5. Use querySelector on the CLONE, not the document
-            // This prevents "null" errors because it looks inside the new card
-            if (data.text) clone.querySelector(".title").innerHTML = data.text;
-            if (data.group) clone.querySelector(".group").innerHTML = `<b>Group: </b>${data.group}`;
-            if (data.date)  clone.querySelector(".date").innerHTML = `<b>Date: </b>${data.date}`;
-            if (data.time)  clone.querySelector(".time").innerHTML = `<b>Time: </b>${data.time}`;
-            if (data.location) clone.querySelector(".location").innerHTML = `<b>Location: </b>${data.location}`;
-            
-            // Handle image if it exists
-            const img = clone.querySelector(".card-img-top");
-            if (data.image) {
-                img.src = `./images/${data.image}.png`;
-            } else {
-                img.style.display = 'none'; // Hide image if source is missing
-            }
+      // 4. Clone the template content
+      const clone = template.content.cloneNode(true);
 
-            const card = clone.querySelector(".card");
-            const removeBtn = clone.querySelector(".remove-btn");
-            const pinBtn = clone.querySelector("#pin-btn");
+      // 5. Use querySelector on the CLONE, not the document
+      // This prevents "null" errors because it looks inside the new card
+      if (data.text) clone.querySelector(".title").innerHTML = data.text;
+      if (data.group)
+        clone.querySelector(".group").innerHTML = `<b>Group: </b>${data.group}`;
+      if (data.date)
+        clone.querySelector(".date").innerHTML = `<b>Date: </b>${data.date}`;
+      if (data.time)
+        clone.querySelector(".time").innerHTML = `<b>Time: </b>${data.time}`;
+      if (data.location)
+        clone.querySelector(".location").innerHTML =
+          `<b>Location: </b>${data.location}`;
 
-            card.style.cursor = "pointer";
-            card.onclick = () => {
-            // Redirect to information.html with the ID in the URL
-                window.location.href = `information.html?eventID=${eventID}&userUID=${userUID}`;
-            };
-            removeBtn.onclick = async (e) => {
-                e.preventDefault();
-                e.stopPropagation();
+      // Handle image if it exists
+      const img = clone.querySelector(".card-img-top");
+      if (data.image) {
+        img.src = `./images/${data.image}.png`;
+      } else {
+        img.style.display = "none"; // Hide image if source is missing
+      }
 
-                try {
-                    const docRef1 = doc(db, "users", userUID, "saved_events", eventID);
-                    const docRef2 = collection(db, "users", userUID, "saved_events", eventID, "information");
-                    const docSnapshot = await getDocs(docRef2);
-                    for (const subDoc of docSnapshot.docs) {
-                        await deleteDoc(subDoc.ref);
-                    }
-                    await deleteDoc(docRef1);
+      const card = clone.querySelector(".card");
+      const removeBtn = clone.querySelector(".remove-btn");
+      const pinBtn = clone.querySelector("#pin-btn");
 
-                    const cardElement = e.target.closest(".col-6");
-                    if (cardElement) {
-                        cardElement.remove();
-                        if (matches.children.length === 0) {
-                            matches.innerHTML = `
+      card.style.cursor = "pointer";
+      card.onclick = () => {
+        // Redirect to information.html with the ID in the URL
+        window.location.href = `information.html?eventID=${eventID}&userUID=${userUID}`;
+      };
+      removeBtn.onclick = async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        try {
+          const docRef1 = doc(db, "users", userUID, "saved_events", eventID);
+          const docRef2 = collection(
+            db,
+            "users",
+            userUID,
+            "saved_events",
+            eventID,
+            "information",
+          );
+          const docSnapshot = await getDocs(docRef2);
+          for (const subDoc of docSnapshot.docs) {
+            await deleteDoc(subDoc.ref);
+          }
+          await deleteDoc(docRef1);
+
+          const cardElement = e.target.closest(".col-6");
+          if (cardElement) {
+            cardElement.remove();
+            if (matches.children.length === 0) {
+              matches.innerHTML = `
                                 <div class="col-12 text-center py-5 px-3">
                                 <p class="mb-4" style="font-size: 1.1rem; color: #4b5563;">
                                 You haven't saved any matches yet!
@@ -240,45 +279,42 @@ async function displayCardsDynamically(userUID) {
                                 </div>
                         `;
             }
-                    }
-                } catch (error) {
-                    console.error("Error deleting document: ", error);
-                }
-            }
+          }
+        } catch (error) {
+          console.error("Error deleting document: ", error);
+        }
+      };
 
-            if (isPinned) {
-                pinBtn.classList.add("active");
-            } else {
-                pinBtn.classList.remove("active");
-            }
+      if (isPinned) {
+        pinBtn.classList.add("active");
+      } else {
+        pinBtn.classList.remove("active");
+      }
 
-            pinBtn.onclick = async (e) => {
-                e.preventDefault();
-                e.stopPropagation();
+      pinBtn.onclick = async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
 
-                try {
-                    const docRef = doc(db, "users", userUID, "saved_events", eventID);
+        try {
+          const docRef = doc(db, "users", userUID, "saved_events", eventID);
 
-                    await updateDoc(docRef, {
-                        isPinned: !isPinned,
-                        createdAt: serverTimestamp()
-                    });
+          await updateDoc(docRef, {
+            isPinned: !isPinned,
+            createdAt: serverTimestamp(),
+          });
 
-                    displayCardsDynamically(userUID);
-                } catch (error) {
-                    console.error("Error toggling pin: ", error);
-                }
-            }
+          displayCardsDynamically(userUID);
+        } catch (error) {
+          console.error("Error toggling pin: ", error);
+        }
+      };
 
-            
-
-            // 6. Append the finished card to the page
-            container.appendChild(clone);
-        });
-
-    } catch (error) {
-        console.error("Error getting documents: ", error);
-    }
+      // 6. Append the finished card to the page
+      container.appendChild(clone);
+    });
+  } catch (error) {
+    console.error("Error getting documents: ", error);
+  }
 }
 const feedbackBtn = document.getElementById("openFeedbackBtn");
 const feedbackBox = document.querySelector(".feedback-container");
@@ -289,46 +325,45 @@ if (feedbackBtn && feedbackBox) {
   });
 }
 document.getElementById("closeFeedback")?.addEventListener("click", () => {
-    feedbackBox.classList.add("hidden");
-  });
-
+  feedbackBox.classList.add("hidden");
+});
 
 const date = new Date();
 const day = date.getDate().toString();
 readQuote(day);
 initFeedbackForm();
 async function displayQuizScores(userUID) {
-    const container = document.getElementById("quiz-scores-go-here");
+  const container = document.getElementById("quiz-scores-go-here");
 
-    // safety check
-    if (!container) return;
+  // safety check
+  if (!container) return;
 
-    try {
-        const q = query(
-            collection(db, "users", userUID, "quizScores"),
-            orderBy("date", "desc")
-        );
+  try {
+    const q = query(
+      collection(db, "users", userUID, "quizScores"),
+      orderBy("date", "desc"),
+    );
 
-        const snapshot = await getDocs(q);
+    const snapshot = await getDocs(q);
 
-        container.innerHTML = "";
+    container.innerHTML = "";
 
-        if (snapshot.empty) {
-            container.innerHTML = `
+    if (snapshot.empty) {
+      container.innerHTML = `
                 <p style="text-align:center; color:#94a3b8;">
                     No quiz attempts yet ⚽
                 </p>
             `;
-            return;
-        }
+      return;
+    }
 
-        snapshot.forEach((docSnap) => {
-            const data = docSnap.data();
+    snapshot.forEach((docSnap) => {
+      const data = docSnap.data();
 
-            const card = document.createElement("div");
-            card.className = "card p-3 mb-2";
+      const card = document.createElement("div");
+      card.className = "card p-3 mb-2";
 
-            card.innerHTML = `
+      card.innerHTML = `
             <div class="quiz-card">
               <div class="quiz-header">
                 <span>⚽ Quiz Match</span>
@@ -347,10 +382,9 @@ async function displayQuizScores(userUID) {
             </div>
           `;
 
-            container.appendChild(card);
-        });
-
-    } catch (error) {
-        console.error("Error loading quiz scores:", error);
-    }
+      container.appendChild(card);
+    });
+  } catch (error) {
+    console.error("Error loading quiz scores:", error);
+  }
 }
