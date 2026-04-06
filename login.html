@@ -4,7 +4,6 @@
     <title>VanGoal</title>
     <meta name="comp1800 template" content="My 1800 App" />
 
-    <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -13,24 +12,16 @@
       href="https://fonts.googleapis.com/css2?family=Comic+Relief:wght@400;700&family=Delius&family=Faster+One&family=Playwrite+NZ+Basic:wght@100..400&display=swap"
       rel="stylesheet"
     />
-
     <link ref="icon" type="image/png" href="./images/football.png" />
-
-    <!-- Web Components for shared navbar and footer layout -->
     <script type="module" src="/src/components/site-navbar.js"></script>
   </head>
 
   <body id="login-page">
-    <!------------------------------>
-    <!-- Your HTML Layout go here -->
-    <!------------------------------>
-
-    <!-- our own navbar goes here -->
+  
+    <!-- navbar -->
     <site-navbar></site-navbar>
 
-    <!-- Main content goes here -->
     <div class="container py-5" style="max-width: 420px">
-      <!-- Alerts -->
       <div id="authAlert" class="alert alert-danger d-none" role="alert"></div>
 
       <!-- Login -->
@@ -106,6 +97,7 @@
       </div>
     </div>
 
+    <!-- Translation widget -->
     <div class="gtranslate_wrapper"></div>
     <script>
       window.gtranslateSettings = {
@@ -120,10 +112,6 @@
       src="https://cdn.gtranslate.net/widgets/latest/float.js"
       defer
     ></script>
-
-    <!---------------------------------------------->
-    <!-- Your own JavaScript scripts go here      -->
-    <!---------------------------------------------->
 
     <script type="module" src="/src/main.js"></script>
 
