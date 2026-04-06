@@ -1,6 +1,7 @@
 import { getAuth } from "firebase/auth";
 import { db } from "../src/firebaseConfig.js";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { getDocs, query, orderBy, deleteDoc } from "firebase/firestore";
 // ===========================
 // 30-question pool (random 10 per attempt)
 // ===========================
@@ -211,6 +212,20 @@ async function showResults() {
         percentage: percent,
         date: serverTimestamp()
       });
+      const scoresRef = collection(db, "users", user.uid, "quizScores");
+
+// get all scores ordered by newest
+const q = query(scoresRef, orderBy("date", "desc"));
+const snapshot = await getDocs(q);
+
+// delete extra (keep only 3)
+if (snapshot.docs.length > 3) {
+  const extraDocs = snapshot.docs.slice(3);
+
+  for (const docSnap of extraDocs) {
+    await deleteDoc(docSnap.ref);
+  }
+}
       console.log("Score saved!");
     } else {
       console.log("No user logged in, score not saved.");

@@ -357,33 +357,47 @@ async function displayQuizScores(userUID) {
       return;
     }
 
-    snapshot.forEach((docSnap) => {
-      const data = docSnap.data();
+    const docs = snapshot.docs.slice(0, 3); // only latest 3
 
-      const card = document.createElement("div");
-      card.className = "card p-3 mb-2";
+const wrapper = document.createElement("div");
+wrapper.className = "quiz-history-box";
 
-      card.innerHTML = `
-            <div class="quiz-card">
-              <div class="quiz-header">
-                <span>⚽ Quiz Match</span>
-                <span class="percentage">${data.percentage}%</span>
-              </div>
-          
-              <div class="quiz-score">
-                <span class="team">YOU</span>
-                <span class="score">${data.score} - ${data.total}</span>
-                <span class="team">QUIZ</span>
-              </div>
-          
-              <div class="quiz-result ${data.percentage >= 70 ? "win" : "lose"}">
-                ${data.percentage >= 70 ? "🏆 WIN" : "❌ LOSS"}
-              </div>
-            </div>
-          `;
+docs.forEach((docSnap, index) => {
+  const data = docSnap.data();
 
-      container.appendChild(card);
-    });
+  const card = document.createElement("div");
+  card.className = "quiz-card fade-up";
+
+  // ⏱ animation delay (stagger effect)
+  card.style.animationDelay = `${index * 0.2}s`;
+
+  card.innerHTML = `
+    <div class="quiz-header">
+      <span>⚽ Quiz Match</span>
+      <span class="percentage">${data.percentage}%</span>
+    </div>
+
+    <div class="quiz-score">
+      <span class="team">YOU</span>
+      <span class="score">${data.score} - ${data.total}</span>
+      <span class="team">QUIZ</span>
+    </div>
+
+    <div class="quiz-result ${data.percentage >= 70 ? "win" : "lose"}">
+      ${data.percentage >= 70 ? "🏆 WIN" : "❌ LOSS"}
+    </div>
+  `;
+
+  wrapper.appendChild(card);
+
+// trigger animation AFTER render
+setTimeout(() => {
+  card.classList.add("show");
+}, 50 + index * 150);
+});
+
+container.innerHTML = "";
+container.appendChild(wrapper);
   } catch (error) {
     console.error("Error loading quiz scores:", error);
   }

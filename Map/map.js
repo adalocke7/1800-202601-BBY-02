@@ -1,3 +1,4 @@
+// HTML injection content
 const htmlContent = {
 
   Food: `
@@ -87,12 +88,13 @@ const htmlContent = {
 
 };
 
-
+// Constant references to buttons and info container
 const FoodInfo = document.getElementById("Food");
 const DrinkInfo = document.getElementById("Drinks");
 const KeyLocations = document.getElementById("KeyLocations");
 const Washrooms = document.getElementById("Washrooms");
 
+// Event listeners for buttons to update info container
 FoodInfo.addEventListener("click", function() {
   document.getElementById("info").innerHTML = htmlContent.Food;
 });
