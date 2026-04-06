@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FIFA Quiz</title>
+  <title>VanGoal</title>
   <link rel="stylesheet" href="quiz.css" />
 </head>
 <body>
-  <a href="../index.html" class="back-btn">
+  <a href="../main.html" class="back-btn">
     <img src="../images/Back.png" alt="Back">
   </a>
   <main class="wrap">
@@ -61,6 +61,10 @@
       </div>
     </section>
 
+    <div class="gtranslate_wrapper"></div>
+    <script>window.gtranslateSettings = {"default_language":"en","native_language_names":true,"detect_browser_language":true,"wrapper_selector":".gtranslate_wrapper","alt_flags":{"en":"canada"}}</script>
+    <script src="https://cdn.gtranslate.net/widgets/latest/float.js" defer></script>
+
     <footer class="foot">
       <small>
       BCIT-BBY2 Copyright
@@ -72,6 +76,6 @@
   <audio id="goalSound" src="sounds/goal.mp3" preload="auto"></audio>
   <audio id="failSound" src="sounds/fail.mp3" preload="auto"></audio>
 
-  <script src="quiz.js"></script>
+  <script type="module" src="quiz.js"></script>
 </body>
 </html>

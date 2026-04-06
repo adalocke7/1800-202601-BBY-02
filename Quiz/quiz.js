@@ -1,3 +1,6 @@
+import { getAuth } from "firebase/auth";
+import { db } from "../src/firebaseConfig.js";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 // ===========================
 // 30-question pool (random 10 per attempt)
 // ===========================
@@ -167,14 +170,7 @@ function renderQuestion() {
       updateButtons();
       scoreMini.textContent = `Score: ${getScore()}`;
 
-      setTimeout(() => {
-        if (currentIndex < questions.length - 1) {
-          currentIndex++;
-          renderQuestion();
-        } else {
-          showResults();
-        }
-      }, 1200);
+      
     });
 
     const span = document.createElement("span");
@@ -190,7 +186,7 @@ function renderQuestion() {
 }
 
 // ===========================
-function showResults() {
+async function showResults() {
   quizArea.classList.add("hidden");
   resultsArea.classList.remove("hidden");
 
@@ -203,25 +199,48 @@ function showResults() {
 
   reviewArea.innerHTML = "";
 
+  // ✅ SAVE SCORE UNDER USER
+  try {
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    if (user) {
+      await addDoc(collection(db, "users", user.uid, "quizScores"), {
+        score: score,
+        total: total,
+        percentage: percent,
+        date: serverTimestamp()
+      });
+      console.log("Score saved!");
+    } else {
+      console.log("No user logged in, score not saved.");
+    }
+
+  } catch (error) {
+    console.error("Error saving score:", error);
+  }
+
+  // ===========================
+  // REVIEW CARDS
+  // ===========================
   questions.forEach((q, i) => {
     const card = document.createElement("div");
     card.className = "review-card";
 
     const correct = q.correctIndex;
-    const user = userAnswers[i];
-    const ok = user === correct;
+    const userAns = userAnswers[i];
+    const ok = userAns === correct;
 
     card.innerHTML = `
       <h3>${i + 1}) ${q.text}</h3>
       <span class="badge ${ok ? "good" : "bad"}">${ok ? "Correct" : "Wrong"}</span>
-      <p><strong>Your answer:</strong> ${user !== null ? q.options[user] : "None"}</p>
+      <p><strong>Your answer:</strong> ${userAns !== null ? q.options[userAns] : "None"}</p>
       <p><strong>Correct answer:</strong> ${q.options[correct]}</p>
     `;
 
     reviewArea.appendChild(card);
   });
 }
-
 // ===========================
 prevBtn.onclick = () => {
   if (currentIndex > 0) {
@@ -237,6 +256,7 @@ nextBtn.onclick = () => {
     currentIndex++;
     renderQuestion();
   }
+  window.scrollTo({ top: 0, behavior: "smooth" });
 };
 
 restartBtn.onclick = startNewAttempt;

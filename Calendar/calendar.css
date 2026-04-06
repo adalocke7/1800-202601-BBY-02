@@ -22,7 +22,7 @@ Source: https://github.com/WingsBRStudio/java...
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   min-height: 100vh;
   background: linear-gradient(135deg, #f5f7fa 0%, #dfe6e9 100%);
 }
@@ -37,16 +37,13 @@ body {
   margin: 40px auto 100px auto;
 }
 
-#back-button{
+#back-button {
   width: 40px;
   margin-top: 40px;
   margin-left: 40px;
-  transition: transform 0.2s ease, filter 0.2s ease;
-}
-
-#back-button:hover{
-  transform: scale(1.1);
-  filter: drop-shadow(0 0 8px #facc15);
+  transition:
+    transform 0.2s ease,
+    filter 0.2s ease;
 }
 
 @media (min-width: 768px) {
@@ -68,11 +65,6 @@ body {
   transition: all 0.3s ease;
 }
 
-.calendar-container:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-}
-
 .calendar-header {
   background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
   color: white;
@@ -83,13 +75,17 @@ body {
 }
 
 .calendar-header::before {
-  content: '';
+  content: "";
   position: absolute;
   top: -50%;
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
   transform: rotate(30deg);
 }
 
@@ -124,11 +120,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.nav-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: scale(1.1);
 }
 
 .weekdays {
@@ -171,12 +162,6 @@ body {
   transform: scale(1.1);
 }
 
-.day.today {
-  background: var(--today);
-  color: white;
-  font-weight: bold;
-}
-
 .day.selected {
   background: var(--selected);
   color: white;
@@ -184,10 +169,22 @@ body {
   animation: pop 0.3s ease;
 }
 
+.day.today {
+  background: var(--today);
+  color: white;
+  font-weight: bold;
+}
+
 @keyframes pop {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .day.other-month {
@@ -196,11 +193,11 @@ body {
 }
 
 .day.has-events::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 5px;
-  width: 5px;
-  height: 5px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: var(--accent);
 }
@@ -224,11 +221,6 @@ body {
   font-weight: 500;
 }
 
-.today-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 206, 201, 0.3);
-}
-
 .event-indicator {
   font-size: 0.8rem;
   color: var(--accent);
@@ -247,10 +239,6 @@ body {
   max-width: 450px;
   height: fit-content;
   transition: 0.3s ease;
-}
-
-.event-panel:hover {
-  transform: translateY(-2px);
 }
 
 .event-header {
@@ -285,10 +273,6 @@ body {
   transition: transform 0.2s ease;
 }
 
-.event-item:hover {
-  transform: translateX(5px);
-}
-
 .event-color {
   width: 14px;
   height: 14px;
@@ -320,7 +304,7 @@ body {
   margin-right: 10px;
 }
 
-.save-button{
+.save-button {
   background: linear-gradient(135deg, var(--accent) 0%, #00b894 100%);
   margin-top: 2%;
   color: white;
@@ -332,13 +316,7 @@ body {
   font-weight: 500;
 }
 
-.save-button:hover{
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 206, 201, 0.3);
-  opacity: 0.8;
-}
-
-.btn-collection{
+.btn-collection {
   background: linear-gradient(135deg, var(--accent) 0%, #00b894 100%);
   color: white;
   border: none;
@@ -349,12 +327,7 @@ body {
   font-weight: 500;
 }
 
-.btn-collection:hover{
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px (rgba(0, 206, 201, 0.3));
-}
-
-header{
+header {
   position: fixed;
   background-color: var(--primary);
   width: 100%;
@@ -370,16 +343,58 @@ header{
     gap: 15px;
   }
 
-  .calendar-container, .event-panel{
+  .calendar-container,
+  .event-panel {
     width: 100%;
     margin: 0 auto;
   }
-  
+
   .event-panel {
     max-width: 400px;
   }
-  
+
   .event-date {
     font-size: 1.3rem;
+  }
+}
+
+@media (hover: hover) {
+  #back-button:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 8px #facc15);
+  }
+
+  .calendar-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+  }
+
+  .nav-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+  }
+
+  .today-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 206, 201, 0.3);
+  }
+
+  .event-panel:hover {
+    transform: translateY(-2px);
+  }
+
+  .event-item:hover {
+    transform: translateX(5px);
+  }
+
+  .save-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 206, 201, 0.3);
+    opacity: 0.8;
+  }
+
+  .btn-collection:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px (rgba(0, 206, 201, 0.3));
   }
 }
