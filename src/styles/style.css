@@ -76,6 +76,12 @@
   color: white !important;
 }
 
+.feedback-btn {
+  background: linear-gradient(135deg, #0f172a, #1d4ed8) !important;
+  border: 1px #1d4ed8 solid !important;
+  transition: 0.4s ease;
+}
+
 .feedback-container h2 {
   color: white;
   font-weight: 700;
@@ -236,6 +242,38 @@ p {
   font-family: "Lato", sans-serif;
 }
 
+.fa-tag {
+  color: #5a22c1 !important;
+}
+
+.fa-earth-americas {
+  color: #007bff !important;
+}
+
+.fa-futbol {
+  color: #28a745 !important;
+}
+
+.fa-medal {
+  color: #ffd700 !important;
+}
+
+.fa-star {
+  color: #ffc107 !important;
+}
+
+.fa-solid {
+  font-size: 25px;
+}
+
+.team-photo {
+  display: block;
+  width: 600px;
+  border-radius: 20px;
+  margin: 0 auto 20px auto;
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1); /* Professional "snap" feel */
+}
+
 @media (max-width: 768px) {
   @media (max-width: 768px) {
     .card {
@@ -313,8 +351,13 @@ p {
   .team-nickname,
   .team-confederation,
   .team-appearance,
-  .team-best {
+  .team-best,
+  .key-players {
     padding-left: 20px;
+  }
+
+  .team-photo {
+    width: 260px;
   }
 }
 
@@ -369,6 +412,27 @@ p {
   #pin-btn:hover {
     background: rgba(115, 115, 115, 0.078);
     border: 1px rgba(115, 115, 115, 0.078) solid;
+  }
+
+  .team-photo:hover {
+    /* 1. The Glass Frost */
+    filter: brightness(1.1) contrast(1.05) saturate(1.1);
+
+    /* 2. Silver/White Glass Glow (No Blue) */
+    box-shadow:
+      0 0 0 2px rgba(255, 255, 255, 0.3),
+      /* Thin glass edge */ 0 20px 40px rgba(0, 0, 0, 0.3); /* Soft depth shadow */
+
+    /* 3. Subtle Lift */
+    transform: translateY(-8px) scale(1.01);
+
+    /* 4. Glass Border */
+    outline: 1px solid rgba(255, 255, 255, 0.5);
+    outline-offset: -10px;
+  }
+
+  .feedback-btn:hover {
+    background: linear-gradient(135deg, #1d4ed8, #2563eb) !important;
   }
 }
 /* ============================= */

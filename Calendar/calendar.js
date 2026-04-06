@@ -296,6 +296,8 @@ document.addEventListener("DOMContentLoaded", function () {
                   best: data.best,
                   content: data.content,
                   title: data.title,
+                  keyplayers: data.keyplayers,
+                  image: data.image,
                 });
               });
             } catch (error) {
