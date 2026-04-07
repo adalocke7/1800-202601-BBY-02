@@ -159,8 +159,8 @@ body::before {
 }
 
 .back-btn img {
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   cursor: pointer;
   transition: transform 0.2s ease, filter 0.2s ease;
 }
@@ -168,4 +168,10 @@ body::before {
 .back-btn img:hover {
   transform: scale(1.1);
   filter: drop-shadow(0 0 8px #facc15);
+}
+.wrap {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 16px;
+  position: relative;
 }
