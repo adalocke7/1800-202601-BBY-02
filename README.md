@@ -51,15 +51,34 @@ Once the application is running:
 ## Project Structure
 
 ```
-elmo-hikes/
+VanGoal/
 ├── src/
+│   ├── components/
+│   │   └── site-navbar.js
+│   ├── images/
+│   │   └── images
+│   ├── sounds/
+│   │   └── sounds
+│   ├── styles/
+│   │   └── style.css
+│   ├── Authentication.js
+│   ├── Calendar.js
+│   ├── Fifaterms.js
+│   ├── FirebaseConfig.js
+│   ├── Information.js
+│   ├── LoginSIgnup.js
 │   ├── main.js
-├── styles/
-│   └── style.css
-├── public/
-├── images/
+│   ├── Map.js
+│   ├── Quiz.js
+├── Calendar.html
+├── FIfaterm.html
+├── Index.html
+├── Information.html
+├── Login.html
+├── Main.html
 ├── index.html
-├── package.json
+├── Map.html
+├── Quiz.json
 ├── README.md
 ```
 
@@ -76,7 +95,8 @@ Maneet Singh- BCIT CST student
 ## Acknowledgments
 
 - Trail data and images are for demonstration purposes only.
-- Code snippets were adapted from resources such as [Stack Overflow](https://stackoverflow.com/) and [MDN Web Docs](https://developer.mozilla.org/).
+- Code snippets were adapted from resources such as [Stack Overflow](https://stackoverflow.com/) and [MDN Web Docs](https://developer.mozilla.org/)
+[Youtube](https://youtube.com/).
 - Icons sourced from [FlatIcon](https://flaticon.com/) and images from Google.
 
 ---
