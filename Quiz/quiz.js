@@ -46,6 +46,9 @@ const QUESTION_POOL = [
 const QUESTIONS_PER_ATTEMPT = 10;
 
 // ===========================
+// ===========================
+// Quiz state variables
+// ===========================
 let questions = [];
 let currentIndex = 0;
 let userAnswers = [];
@@ -74,6 +77,8 @@ const goalSound = document.getElementById("goalSound");
 const failSound = document.getElementById("failSound");
 
 // ===========================
+// Quiz state variables
+// ===========================
 function playSound(audioEl) {
   if (!audioEl) return;
   try {
@@ -83,11 +88,15 @@ function playSound(audioEl) {
 }
 
 // ===========================
+// Shuffles questions
 function shuffle(array) {
   return array.sort(() => Math.random() - 0.5);
 }
 
 // ===========================
+// Plays sound safely
+// ===========================
+
 function startNewAttempt() {
   questions = shuffle([...QUESTION_POOL]).slice(0, QUESTIONS_PER_ATTEMPT);
   currentIndex = 0;
@@ -101,6 +110,8 @@ function startNewAttempt() {
 }
 
 // ===========================
+// Calculates score
+// ===========================
 function getScore() {
   let score = 0;
   for (let i = 0; i < questions.length; i++) {
@@ -110,6 +121,8 @@ function getScore() {
 }
 
 // ===========================
+// Updates progress bar + text
+// ===========================
 function updateProgress() {
   progressText.textContent = `Question ${currentIndex + 1} of ${questions.length}`;
   scoreMini.textContent = `Score: ${getScore()}`;
@@ -117,6 +130,8 @@ function updateProgress() {
   barFill.style.width = `${pct}%`;
 }
 
+/// ===========================
+// Updates progress bar + text
 // ===========================
 function setFeedback(message, type) {
   feedback.textContent = message;
@@ -124,12 +139,16 @@ function setFeedback(message, type) {
 }
 
 // ===========================
+// Shows feedback message
+// ===========================
 function updateButtons() {
   prevBtn.disabled = currentIndex === 0;
   nextBtn.textContent = currentIndex === questions.length - 1 ? "Finish" : "Next";
   nextBtn.disabled = userAnswers[currentIndex] === null;
 }
 
+// ===========================
+// Enables/disables buttons
 // ===========================
 function renderQuestion() {
   const q = questions[currentIndex];
@@ -186,7 +205,7 @@ function renderQuestion() {
   updateButtons();
 }
 
-// ===========================
+// Show results
 async function showResults() {
   quizArea.classList.add("hidden");
   resultsArea.classList.remove("hidden");
@@ -256,14 +275,14 @@ if (snapshot.docs.length > 3) {
     reviewArea.appendChild(card);
   });
 }
-// ===========================
+//Return to the previous page
 prevBtn.onclick = () => {
   if (currentIndex > 0) {
     currentIndex--;
     renderQuestion();
   }
 };
-
+//Goes to the next Page
 nextBtn.onclick = () => {
   if (currentIndex === questions.length - 1) {
     showResults();
@@ -277,5 +296,5 @@ nextBtn.onclick = () => {
 restartBtn.onclick = startNewAttempt;
 newAttemptBtn.onclick = startNewAttempt;
 
-// ===========================
+
 startNewAttempt();
