@@ -767,22 +767,5 @@ h2 {
     transform: translateY(0);
   }
 }
-.display-4,
-h1, h2, h3 {
-  font-family: "HeadingFont", sans-serif;
-}
-#welcomeMessage,
-.display-4 {
-  font-family: "HeadingFont", sans-serif;
-}
-.display-4 {
-  letter-spacing: 2px;
-}
-h2 {
-  font-family: "QuizFont", sans-serif;
-}
-.quiz-history-title {
-  font-family: "QuizFont", sans-serif;
-  letter-spacing: 2px;
-  text-align: center;
-}
+
+
