@@ -359,19 +359,19 @@ async function displayQuizScores(userUID) {
 
     const docs = snapshot.docs.slice(0, 3); // only latest 3
 
-const wrapper = document.createElement("div");
-wrapper.className = "quiz-history-box";
+    const wrapper = document.createElement("div");
+    wrapper.className = "quiz-history-box";
 
-docs.forEach((docSnap, index) => {
-  const data = docSnap.data();
+    docs.forEach((docSnap, index) => {
+      const data = docSnap.data();
 
-  const card = document.createElement("div");
-  card.className = "quiz-card fade-up";
+      const card = document.createElement("div");
+      card.className = "quiz-card fade-up";
 
-  // ⏱ animation delay (stagger effect)
-  card.style.animationDelay = `${index * 0.2}s`;
+      // ⏱ animation delay (stagger effect)
+      card.style.animationDelay = `${index * 0.2}s`;
 
-  card.innerHTML = `
+      card.innerHTML = `
     <div class="quiz-header">
       <span>⚽ Quiz Match</span>
       <span class="percentage">${data.percentage}%</span>
@@ -388,16 +388,19 @@ docs.forEach((docSnap, index) => {
     </div>
   `;
 
-  wrapper.appendChild(card);
+      wrapper.appendChild(card);
 
-// trigger animation AFTER render
-setTimeout(() => {
-  card.classList.add("show");
-}, 50 + index * 150);
-});
+      // trigger animation AFTER render
+      setTimeout(
+        () => {
+          card.classList.add("show");
+        },
+        50 + index * 150,
+      );
+    });
 
-container.innerHTML = "";
-container.appendChild(wrapper);
+    container.innerHTML = "";
+    container.appendChild(wrapper);
   } catch (error) {
     console.error("Error loading quiz scores:", error);
   }
