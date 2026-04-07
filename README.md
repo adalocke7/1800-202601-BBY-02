@@ -77,7 +77,7 @@ Maneet Singh- BCIT CST student
 
 - Trail data and images are for demonstration purposes only.
 - Code snippets were adapted from resources such as [Stack Overflow](https://stackoverflow.com/) and [MDN Web Docs](https://developer.mozilla.org/).
-- Icons sourced from [FontAwesome](https://fontawesome.com/) and images from [Unsplash](https://unsplash.com/).
+- Icons sourced from [FlatIcon](https://flaticon.com/) and images from Google.
 
 ---
 
@@ -85,14 +85,12 @@ Maneet Singh- BCIT CST student
 ## Limitations and Future Work
 ### Limitations
 
-- Limited trail details (e.g., no live trail conditions).
-- Accessibility features can be further improved.
+- Limited to FIFA-related data and events 
 
 ### Future Work
 
-- Implement map view and trailhead directions.
-- Add filtering and sorting options (e.g., by difficulty, distance).
-- Create a dark mode for better usability in low-light conditions.
+- Create an edit feature for the calendar so the user can add their own events.
+- Add a variety of sports, not only FIFA.
 
 ---
 
