@@ -44,22 +44,24 @@
           </section>
      </site-navbar>
 
-    <!-- Main content goes here -->
      <div class="container-fluid bg-light text-dark p-5">
         <div class="container bg-light p-5">
             <h1 class="display-4">Welcome <span id="name-goes-here" class="notranslate">friend </span> </h1>
+            <!-- Daily quote section -->
             <h4 class="quotes-go-here">Everyday quote: <span id="quotes"><b>quote: </b></span></h4>
         </div>
     </div>
 
+    <!-- Saved matches section -->
     <div class="container-fluid bg-light text-dark p-5">
         <h1 id="card-title"><u>Your Saved Matches</u></h1>
+        <!-- Container where saved match cards will be inserted dynamically -->
         <div id="matches-go-here" class="row justify-content-center">
         </div>
     </div>
-
+    
+    <!-- Template used to generate saved match cards dynamically -->
     <template id="matchesCardTemplate">
-    <!-- Changed p-1 to px-1 (horizontal only) and added g-2 to the parent row (see below) -->
     <div class="col-6 col-md-4 px-1 pb-2"> 
         <div class="card w-100">
             <img src="..." class="card-img-top" alt="...">
@@ -77,6 +79,7 @@
         </div>
     </div>
 </template>
+
     <!-- <h1 style="color:white; text-align: center;" id="card-title"><u>Quiz History</u></h1> -->
     <h2 class="quiz-history-title">Quiz History</h2>
     <div id="quiz-scores-go-here"></div>

@@ -246,19 +246,19 @@ document.addEventListener("DOMContentLoaded", function () {
           saveBtn.style.color = "white";
         }
 
-        // Save / unsave event
+        // Check if event already exists in user's saved events
         saveBtn.onclick = async () => {
           const currentSnap = await getDoc(docRef);
 
           if (currentSnap.exists()) {
-            // Remove saved event
+            // If it exists, remove the saved event
             await deleteDoc(docRef);
             saveBtn.innerHTML = "<b>Save</b>";
             saveBtn.style.background = ""; // Back to default
             saveBtn.style.color = "";
             console.log("Unsaved!");
           } else {
-            // Save event
+            // Otherwise, save the event to Firestore
             await setDoc(docRef, {
               image: match.image,
               date: dateStr,
@@ -270,6 +270,9 @@ document.addEventListener("DOMContentLoaded", function () {
               createdAt: serverTimestamp(),
             });
 
+            // Get additional event information from
+            // events/{date}/information to
+            // users/{user}/saved_events/{event}/information
             try {
               const source = collection(db, "events", dateStr, "information");
               const info = await getDocs(source);
@@ -283,12 +286,19 @@ document.addEventListener("DOMContentLoaded", function () {
                 "information",
               );
 
+              // Loop through each document in the source collection
               info.forEach(async (infoDoc) => {
+                // Extract the data from the document
                 const data = infoDoc.data();
+
+                // Get the document ID (used to keep same ID)
                 const infoID = infoDoc.id;
 
+                // Create a reference for the new document in the destination
                 const newDocRef = doc(destination, infoID);
 
+                // Copy selected fields from the source document
+                // into the new destination document
                 await setDoc(newDocRef, {
                   nickname: data.nickname,
                   appearance: data.appearance,
@@ -301,8 +311,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
               });
             } catch (error) {
+              // Catch and display errors if the copy process fails
               console.error("Error copying document: ", error);
             }
+            // Update the save button UI after saving
             saveBtn.innerHTML = "<b>Saved!</b>";
             saveBtn.style.background = "#28a745";
             saveBtn.style.color = "white";
@@ -317,34 +329,32 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Navigation buttons
+  // Move to previous month
   prevMonthBtn.onclick = () => {
     currentDate.setMonth(currentDate.getMonth() - 1);
     renderCalendar();
   };
+
+  // Move to next month
   nextMonthBtn.onclick = () => {
     currentDate.setMonth(currentDate.getMonth() + 1);
     renderCalendar();
   };
+
+  // Return calendar to today's date
   todayBtn.onclick = () => {
     currentDate = new Date();
     selectedDate = new Date();
     fetchEvents();
   };
 
-  // Open saved events page
-  if (collectionBtn) {
-    collectionBtn.onclick = () => {
-      window.location.href = "/favorite.html";
-    };
-  }
-
+  // Return to the previous page
   if (backBtn) {
     backBtn.onclick = () => {
       window.history.back();
     };
   }
 
-  // Initial load
+  // Load events when the page first opens
   fetchEvents();
 });
