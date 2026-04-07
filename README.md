@@ -1,20 +1,21 @@
-# Elmo Hikes
+# VanGoal
 
 
 ## Overview
-Elmo Hikes is a client-side JavaScript web application that helps users discover and explore hiking trails. The app displays a curated list of hike trails, each with details such as name, location, difficulty, and an image. Users can browse the list and mark their favorite trails for easy access later.
-
-Developed for the COMP 1800 course, this project applies User-Centred Design practices and agile project management, and demonstrates integration with Firebase backend services for storing user favorites.
+Our team, BBY02, is developing a web application to help tourists coming to Vancouver to watch FIFA matches by helping organize FIFA events the user can save, stadium info to help navigate, and teaching them FIFA terminology to help understand the FIFA match.
 
 ---
 
 
 ## Features
 
-- Browse a list of curated hiking trails with images and details
-- Mark and unmark trails as favorites
-- View a personalized list of favorite hikes
-- Responsive design for desktop and mobile
+- Browse the current FIFA matches in Vancouver and save matches.
+- See saved matches in the home page and view details on those matches.
+- View the map of the stadium and the details of the stadium.
+- Take a quiz on FIFA terminology and save the best scores.
+- Learn FIFA terminology and search for specific terms.
+- Change the language to your native language.
+- Give feedback on our web app.
 
 ---
 
@@ -40,9 +41,9 @@ To run the application locally:
 
 Once the application is running:
 
-1.  Browse the list of hiking trails displayed on the main page.
-2.  Click the heart icon (or similar) to mark a trail as a favorite.
-3.  View your favorite hikes in the favorites section.
+1.  Browse the list of matches happening.
+2.  Save matches that are interesting.
+3.  View your favourite hikes on the home page and view details.
 
 ---
 
