@@ -1,13 +1,6 @@
-@font-face {
-  font-family: "HeadingFont";
-  src: url("../../Fonts/HeadingFont.otf") format("opentype");
-}
-@font-face {
-  font-family: "QuizFont";
-  src: url("../../Fonts/Fontquiz.otf") format("opentype");
-}
+
 #index-page {
-  background-image: url("../../images/Fifa.jpg");
+  background-image: url("../images/Fifa.jpg");
   background-size: cover;
   height: 100vh;
   margin: 0;
@@ -15,7 +8,7 @@
 }
 
 #login-page {
-  background-image: url("../../images/Fifa.jpg");
+  background-image: url("../images/Fifa.jpg");
   background-size: cover;
   height: 100vh;
   margin: 0;

@@ -147,15 +147,21 @@ function showFeedbackMessage(message, type) {
   }, 5000);
 }
 
+// Reads and displays the daily quote from Firestore
 function readQuote(day) {
+  // Reference to the quote document for the specific day
   const quoteDocRef = doc(db, "quotes", day);
 
+  // Listen for real-time updates to the quote document
   onSnapshot(
     quoteDocRef,
     (docSnap) => {
+      // Check if the document exists
       if (docSnap.exists()) {
+        // Get the HTML element where the quote will be displayed
         const quotes = document.getElementById("quotes");
         try {
+          // Insert the quote text into the HTML element
           quotes.innerHTML = docSnap.data().quote;
         } catch (error) {
           console.log();
@@ -164,21 +170,27 @@ function readQuote(day) {
         console.log("No such document");
       }
     },
+    // Error handler for snapshot listener
     (error) => {
       console.error("Error listening to document: ", error);
     },
   );
 }
 
+// Dynamically loads and displays saved event cards for a user
 async function displayCardsDynamically(userUID) {
+  // Container where cards will be inserted
   const container = document.getElementById("matches-go-here");
+  // HTML template used to generate each card
   const template = document.getElementById("matchesCardTemplate");
 
-  // 1. Safety check: does the container exist on this page?
+  // Safety check: stop execution if elements don't exist
   if (!container || !template) return;
 
   try {
     const matches = document.getElementById("matches-go-here");
+    // Query Firestore for saved events
+    // Events are ordered by pinned status first, then by creation time
     const q = query(
       collection(db, "users", userUID, "saved_events"),
       orderBy("isPinned", "desc"),
@@ -186,10 +198,10 @@ async function displayCardsDynamically(userUID) {
     );
     const querySnapshot = await getDocs(q);
 
-    // 2. Clear container so we don't double-up cards
+    // Clear container before inserting new cards
     container.innerHTML = "";
 
-    // 3. If no documents exist, just exit (shows nothing)
+    // If user has no saved events, show a message
     if (querySnapshot.empty) {
       matches.innerHTML = `
                 <div class="col-12 text-center py-5 px-3">
@@ -204,18 +216,20 @@ async function displayCardsDynamically(userUID) {
       return;
     }
 
+    // Loop through each saved event document
     querySnapshot.forEach((docSnap) => {
+      // Event data
       const data = docSnap.data();
+      // Document ID
       const eventID = docSnap.id;
 
       const isPinned = data.isPinned || false;
       const createdAt = data.createdAt;
 
-      // 4. Clone the template content
+      // Clone the card template
       const clone = template.content.cloneNode(true);
 
-      // 5. Use querySelector on the CLONE, not the document
-      // This prevents "null" errors because it looks inside the new card
+      // Populate card fields with event data
       if (data.text) clone.querySelector(".title").innerHTML = data.text;
       if (data.group)
         clone.querySelector(".group").innerHTML = `<b>Group: </b>${data.group}`;
@@ -227,29 +241,35 @@ async function displayCardsDynamically(userUID) {
         clone.querySelector(".location").innerHTML =
           `<b>Location: </b>${data.location}`;
 
-      // Handle image if it exists
+      // Handle card image
       const img = clone.querySelector(".card-img-top");
       if (data.image) {
-        img.src = `./images/${data.image}.png`;
+        img.src = `./src/images/${data.image}.png`;
       } else {
-        img.style.display = "none"; // Hide image if source is missing
+        img.style.display = "none"; // Hide image if none exists
       }
 
+      // Select important card elements
       const card = clone.querySelector(".card");
       const removeBtn = clone.querySelector(".remove-btn");
       const pinBtn = clone.querySelector("#pin-btn");
 
+      // Make the card clickable → open event information page
       card.style.cursor = "pointer";
       card.onclick = () => {
         // Redirect to information.html with the ID in the URL
         window.location.href = `information.html?eventID=${eventID}&userUID=${userUID}`;
       };
+      // Remove button functionality
       removeBtn.onclick = async (e) => {
+        // Prevent click from triggering card navigation
         e.preventDefault();
         e.stopPropagation();
 
         try {
+          // Reference to the main saved event document
           const docRef1 = doc(db, "users", userUID, "saved_events", eventID);
+          // Reference to the information subcollection
           const docRef2 = collection(
             db,
             "users",
@@ -258,15 +278,19 @@ async function displayCardsDynamically(userUID) {
             eventID,
             "information",
           );
+          // Delete all documents inside the information subcollection
           const docSnapshot = await getDocs(docRef2);
           for (const subDoc of docSnapshot.docs) {
             await deleteDoc(subDoc.ref);
           }
+          // Delete the main event document
           await deleteDoc(docRef1);
 
+          // Remove the card from the UI
           const cardElement = e.target.closest(".col-6");
           if (cardElement) {
             cardElement.remove();
+            // Show empty message if no cards remain
             if (matches.children.length === 0) {
               matches.innerHTML = `
                                 <div class="col-12 text-center py-5 px-3">
@@ -285,12 +309,14 @@ async function displayCardsDynamically(userUID) {
         }
       };
 
+      // Apply visual state for pinned events
       if (isPinned) {
         pinBtn.classList.add("active");
       } else {
         pinBtn.classList.remove("active");
       }
 
+      // Toggle pin status when button is clicked
       pinBtn.onclick = async (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -298,18 +324,20 @@ async function displayCardsDynamically(userUID) {
         try {
           const docRef = doc(db, "users", userUID, "saved_events", eventID);
 
+          // Update pinned status and timestamp
           await updateDoc(docRef, {
             isPinned: !isPinned,
             createdAt: serverTimestamp(),
           });
 
+          // Reload cards to reflect new order
           displayCardsDynamically(userUID);
         } catch (error) {
           console.error("Error toggling pin: ", error);
         }
       };
 
-      // 6. Append the finished card to the page
+      // Add the generated card to the container
       container.appendChild(clone);
     });
   } catch (error) {

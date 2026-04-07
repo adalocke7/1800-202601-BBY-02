@@ -1,6 +1,6 @@
-import {onAuthStateChanged} from "firebase/auth";     
-import { auth } from '/src/firebaseConfig.js';        
-import { logoutUser } from '/src/authentication.js';  
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../firebaseConfig.js";
+import { logoutUser } from "../authentication.js";
 
 class SiteNavbar extends HTMLElement {
     constructor() {
@@ -15,13 +15,13 @@ class SiteNavbar extends HTMLElement {
                 <div class="container-fluid">
                     <div class="dropdown">
                         <button class="btn btn-transparent dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="./images/menu.png" height="24">
+                            <img src="./src/images/menu.png" height="24">
                         </button>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="./main.html">Home</a></li>
-                            <li><a class="dropdown-item" href="./Fifa terminology/Fifaterm.html ">Terminology</a></li>
+                            <li><a class="dropdown-item" href="./Fifaterm.html">Terminology</a></li>
                             <li><a class="dropdown-item" href="./calendar.html">Calendar</a></li>
-                            <li><a class="dropdown-item" href="./Quiz/quiz.html">Quiz</a></li>
+                            <li><a class="dropdown-item" href="./quiz.html">Quiz</a></li>
                             <li><a class="dropdown-item" href="./map.html">Map</a></li>
                         </ul>
                     </div>
@@ -49,7 +49,7 @@ class SiteNavbar extends HTMLElement {
                 const signOutBtn = authControls.querySelector('#signOutBtn');
                 signOutBtn?.addEventListener('click', logoutUser);
             } else {
-                updatedAuthControl = `<a class="btn btn-outline-light" id="loginBtn" href="/login.html" style="min-width: 80px;">Log in</a>`;
+                updatedAuthControl = `<a class="btn btn-outline-light" id="loginBtn" href="./login.html" style="min-width: 80px;">Log in</a>`;
                 authControls.innerHTML = updatedAuthControl;
             }
         });

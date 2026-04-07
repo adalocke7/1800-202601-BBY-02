@@ -3,7 +3,7 @@
   <head>
     <title>VanGoal</title>
     <meta name="FIFA web app" content="FIFA web app landing page" />
-    <link rel="Stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./src/styles/style.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -24,28 +24,23 @@
       rel="stylesheet"
     />
 
-    <link rel="icon" type="image/png" href="./images/football.png" />
+    <link rel="icon" type="image/png" href="./src/images/football.png" />
 
-    <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- Web Components for shared navbar and footer layout -->
-    <script type="module" src="/src/components/site-navbar.js"></script>
+    <script type="module" src="./src/components/site-navbar.js"></script>
   </head>
 
   <body id="information-page">
-    <!------------------------------>
-    <!-- Your HTML Layout go here -->
-    <!------------------------------>
+    <!-- Navigation Bar -->
 
-    <!-- our own navbar goes here -->
     <site-navbar></site-navbar>
 
-    <!-- Main content goes here -->
+    <!-- Container where event/team information will be inserted dynamically -->
     <div id="information"></div>
 
-    <!-- Translation widget -->
+    <!-- Translation widget from G Translate -->
     <div class="gtranslate_wrapper"></div>
     <script>
       window.gtranslateSettings = {
@@ -64,7 +59,7 @@
     <!---------------------------------------------->
     <!-- Your own JavaScript scripts go here      -->
     <!---------------------------------------------->
-    <script type="module" src="/src/main.js"></script>
-    <script type="module" src="/src/information.js"></script>
+    <script type="module" src="./src/main.js"></script>
+    <script type="module" src="./src/information.js"></script>
   </body>
 </html>

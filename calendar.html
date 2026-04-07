@@ -9,20 +9,26 @@ Source: https://github.com/WingsBRStudio/java...
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>VanGoal</title>
-    <link rel="stylesheet" href="./Calendar/calendar.css" />
+    <link rel="stylesheet" href="./src/styles/calendar.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <script type="module" src="./src/components/site-navbar.js"></script>
-    <link rel="icon" type="image/png" href="./images/football.png" />
+    <link rel="icon" type="image/png" href="./src/images/football.png" />
   </head>
   <body>
+    <!-- Custom navigation bar -->
     <site-navbar></site-navbar>
-    <img id="back-button" src="./images/Back.png" alt="Back" />
+
+    <!-- Back button for returning to previous page -->
+    <img id="back-button" src="./src/images/Back.png" alt="Back" />
+
+    <!-- Main container holding the calendar and event panel -->
     <div class="container">
       <div class="calendar-container">
         <div class="calendar-header">
+          <!-- Navigation buttons for switching months -->
           <div class="nav-buttons">
             <button class="nav-btn" id="prev-month">
               <i class="fas fa-chevron-left"></i>
@@ -47,12 +53,11 @@ Source: https://github.com/WingsBRStudio/java...
         <div class="days" id="days"></div>
 
         <div class="calendar-footer">
+          <!-- Button to jump back to today's date -->
           <button class="today-btn" id="today-btn">
             <i class="fas fa-calendar-day"></i> Today
           </button>
-          <button class="btn-collection" id="btn-collection" type="button">
-            Collection
-          </button>
+          <!-- Circle legend explaining event indicator -->
           <div class="event-indicator">
             <i
               class="fas fa-circle"
@@ -69,7 +74,9 @@ Source: https://github.com/WingsBRStudio/java...
           <div class="event-date" id="event-date">Select a date</div>
           <i class="fas fa-calendar-alt event-icon"></i>
         </div>
+        <!-- List of events displayed dynamically -->
         <div class="event-list" id="event-list">
+          <!-- Default message when no date is selected -->
           <div class="no-events">
             Select a date with events to view them here
           </div>
@@ -77,7 +84,7 @@ Source: https://github.com/WingsBRStudio/java...
       </div>
     </div>
 
-    <!-- Translation widget -->
+    <!-- Translation widget from G Translate -->
     <div class="gtranslate_wrapper"></div>
     <script>
       window.gtranslateSettings = {
@@ -93,8 +100,8 @@ Source: https://github.com/WingsBRStudio/java...
       defer
     ></script>
 
-    <script type="module" src="/src/firebaseConfig.js"></script>
-    <script type="module" src="./Calendar/calendar.js"></script>
+    <script type="module" src="./src/firebaseConfig.js"></script>
+    <script type="module" src="./src/calendar.js"></script>
     <script type="module" src="./src/main.js"></script>
   </body>
 </html>
