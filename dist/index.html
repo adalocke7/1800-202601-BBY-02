@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>VanGoal</title>
+    <meta name="FIFA web app" content="FIFA web app landing page" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Comic+Relief:wght@400;700&family=Delius&family=Faster+One&family=Playwrite+NZ+Basic:wght@100..400&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="icon" type="image/png" href="/assets/football-BKnCYnNd.png" />
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <script type="module" crossorigin src="/assets/firebaseConfig-CJFEPSh8.js"></script>
+    <script type="module" crossorigin src="/assets/main-Bcy_5-K6.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/main-B7vX9nvA.css">
+  </head>
+
+  <body id="index-page">
+
+    <site-navbar></site-navbar>
+
+  <!-- This is the welcome on the landing page, with a login/signup button -->
+    <div class="login-container">
+      <div class="px-4 py-5 text-center">
+        <img
+          class="d-block mx-auto mb-4"
+          src="/assets/football-BKnCYnNd.png"
+          alt=""
+          width="72"
+          height="57"
+        />
+        <h1 class="display-5 fw-bold">Welcome to our FIFA web app!</h1>
+        <div class="col-lg-6 mx-auto">
+          <p class="lead mb-4">
+            This is a web app that helps you track FIFA games, navigate the
+            stadium, and learn FIFA termanology.
+          </p>
+          <div class="d-grid justify-content-sm-center">
+            <button
+              onclick="window.location.href = 'login.html'"
+              type="button"
+              class="btn btn-info btn-lg"
+            >
+              Login/Signup
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Translation widget -->
+    <div class="gtranslate_wrapper"></div>
+    <script>
+      window.gtranslateSettings = {
+        default_language: "en",
+        native_language_names: true,
+        detect_browser_language: true,
+        wrapper_selector: ".gtranslate_wrapper",
+        alt_flags: { en: "canada" },
+      };
+    </script>
+    <script
+      src="https://cdn.gtranslate.net/widgets/latest/float.js"
+      defer
+    ></script>
+
+    <!---------------------------------------------->
+    <!-- Your own JavaScript scripts go here      -->
+    <!---------------------------------------------->
+  </body>
+</html>

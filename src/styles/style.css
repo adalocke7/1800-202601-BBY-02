@@ -1,6 +1,6 @@
 
 #index-page {
-  background-image: url("../images/Fifa.jpg");
+  background-image: url("/public/images/Fifa.jpg");
   background-size: cover;
   height: 100vh;
   margin: 0;
@@ -8,7 +8,7 @@
 }
 
 #login-page {
-  background-image: url("../images/Fifa.jpg");
+  background-image: url("/public/images/Fifa.jpg");
   background-size: cover;
   height: 100vh;
   margin: 0;

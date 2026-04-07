@@ -2,6 +2,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
 
+
 // Import Firebase authentication functions
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
@@ -68,7 +69,7 @@ async function loadEventDetails(userUID, eventID) {
       // Create HTML layout for displaying the information
       const infoHtml = `
                 <div class="team-title"><h2><u>${data.title}</u><h2><br></div>
-                <img class="team-photo" src="./src/images/${data.image}">
+                <img class="team-photo" src="/images/${data.image}">
                 <div class="team-nickname"><p><b><i class="fa-solid fa-tag"></i>Nickname: </b>${data.nickname}</p></div>
                 <div class="team-confederation"><p><b><i class="fa-solid fa-earth-americas"></i>Confederation: </b>${data.confederation}</p></div>
                 <div class="team-appearance"><p><b><i class="fa-solid fa-futbol"></i>World Cup Appearances: </b>${data.appearance}</p></div>

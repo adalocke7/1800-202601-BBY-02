@@ -1,0 +1,4 @@
+import{g as s,c as d,d as c}from"./firebaseConfig-CJFEPSh8.js";const o=document.getElementById("termsContainer"),a=document.getElementById("searchInput");let r=[];async function l(){try{r=[],(await s(d(c,"Fifa Terminology"))).forEach(n=>{r.push({name:n.id,definition:n.data().definition})}),i(r)}catch(e){console.error("Error loading terms:",e),o.innerHTML="<p>Error loading data</p>"}}function i(e){if(o.innerHTML="",e.length===0){o.innerHTML="<p>No results found</p>";return}e.forEach(n=>{const t=document.createElement("div");t.className="term-card",t.innerHTML=`
+      <h2>${n.name}</h2>
+      <p>${n.definition}</p>
+    `,o.appendChild(t)})}a.addEventListener("input",()=>{const e=a.value.toLowerCase(),n=r.filter(t=>t.name.toLowerCase().includes(e)||t.definition.toLowerCase().includes(e));i(n)});document.addEventListener("DOMContentLoaded",l);

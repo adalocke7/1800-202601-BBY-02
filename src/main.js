@@ -244,7 +244,7 @@ async function displayCardsDynamically(userUID) {
       // Handle card image
       const img = clone.querySelector(".card-img-top");
       if (data.image) {
-        img.src = `./src/images/${data.image}.png`;
+        img.src = `/images/${data.image}.png`;
       } else {
         img.style.display = "none"; // Hide image if none exists
       }

@@ -1,0 +1,107 @@
+<!--
+Calendar UI adapted from an open-source project by WingsBRStudio
+Source: https://github.com/WingsBRStudio/java...
+-->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VanGoal</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="icon" type="image/png" href="/assets/football-BKnCYnNd.png" />
+    <script type="module" crossorigin src="/assets/calendar-BDy7o5fj.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/firebaseConfig-CJFEPSh8.js">
+    <link rel="modulepreload" crossorigin href="/assets/main-Bcy_5-K6.js">
+    <link rel="stylesheet" crossorigin href="/assets/main-B7vX9nvA.css">
+    <link rel="stylesheet" crossorigin href="/assets/calendar-BEh2SZ6b.css">
+  </head>
+  <body>
+    <!-- Custom navigation bar -->
+    <site-navbar></site-navbar>
+
+    <!-- Back button for returning to previous page -->
+    <img id="back-button" src="/assets/Back-1ubIFBiX.png" alt="Back" />
+
+    <!-- Main container holding the calendar and event panel -->
+    <div class="container">
+      <div class="calendar-container">
+        <div class="calendar-header">
+          <!-- Navigation buttons for switching months -->
+          <div class="nav-buttons">
+            <button class="nav-btn" id="prev-month">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="nav-btn" id="next-month">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+          <div class="month-year" id="month-year">September 2025</div>
+        </div>
+
+        <div class="weekdays">
+          <div class="weekday">Sun</div>
+          <div class="weekday">Mon</div>
+          <div class="weekday">Tue</div>
+          <div class="weekday">Wed</div>
+          <div class="weekday">Thu</div>
+          <div class="weekday">Fri</div>
+          <div class="weekday">Sat</div>
+        </div>
+
+        <div class="days" id="days"></div>
+
+        <div class="calendar-footer">
+          <!-- Button to jump back to today's date -->
+          <button class="today-btn" id="today-btn">
+            <i class="fas fa-calendar-day"></i> Today
+          </button>
+          <!-- Circle legend explaining event indicator -->
+          <div class="event-indicator">
+            <i
+              class="fas fa-circle"
+              style="color: var(--accent); font-size: 1rem"
+            ></i>
+            <span>Has events</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Event Panel -->
+      <div class="event-panel" id="event-panel">
+        <div class="event-header">
+          <div class="event-date" id="event-date">Select a date</div>
+          <i class="fas fa-calendar-alt event-icon"></i>
+        </div>
+        <!-- List of events displayed dynamically -->
+        <div class="event-list" id="event-list">
+          <!-- Default message when no date is selected -->
+          <div class="no-events">
+            Select a date with events to view them here
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Translation widget from G Translate -->
+    <div class="gtranslate_wrapper"></div>
+    <script>
+      window.gtranslateSettings = {
+        default_language: "en",
+        native_language_names: true,
+        detect_browser_language: true,
+        wrapper_selector: ".gtranslate_wrapper",
+        alt_flags: { en: "canada" },
+      };
+    </script>
+    <script
+      src="https://cdn.gtranslate.net/widgets/latest/float.js"
+      defer
+    ></script>
+
+  </body>
+</html>

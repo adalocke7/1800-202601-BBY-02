@@ -4,7 +4,7 @@ body {
   margin: 0;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 
-  background-image: url("../images/image.jpg");
+  background-image: url("/public/images/image.jpg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;

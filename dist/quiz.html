@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VanGoal</title>
+  <script type="module" crossorigin src="/assets/quiz-CL6NsKdO.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/firebaseConfig-CJFEPSh8.js">
+  <link rel="stylesheet" crossorigin href="/assets/quiz-dm6D1fKD.css">
+</head>
+<body>
+  <a href="main.html" class="back-btn">
+    <img src="/assets/Back-1ubIFBiX.png" alt="Back">
+  </a>
+  <main class="wrap">
+    <header class="top">
+      <h1 class="title">
+        <img src="/assets/quiz-D4E0clCK.gif" alt="Quiz logo" class="title-img">
+        FIFA Quiz
+      </h1>
+      <p>10 questions each attempt</p>
+    </header>
+
+    <section class="card">
+      <!-- Progress -->
+      <div class="progress">
+        <div class="progress-top">
+          <span id="progressText">Question 1 of 10</span>
+          <span id="scoreMini">Score: 0</span>
+        </div>
+        <div class="bar">
+          <div class="bar-fill" id="barFill" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <!-- Quiz Area -->
+      <div id="quizArea" class="quiz-area">
+        <h2 id="questionText">Loading...</h2>
+        <div id="optionsArea" class="options"></div>
+
+        <div id="feedback" class="feedback" aria-live="polite"></div>
+
+        <div class="actions">
+          <button id="prevBtn" class="btn ghost" type="button">Previous</button>
+          <button id="nextBtn" class="btn" type="button">Next</button>
+        </div>
+
+        <div class="actions extra">
+          <button id="newAttemptBtn" class="btn ghost" type="button">Restart Quiz</button>
+        </div>
+      </div>
+
+      <!-- Results Area -->
+      <div id="resultsArea" class="results hidden">
+        <h2 id="resultTitle">Your Results</h2>
+        <p id="resultSummary" class="summary"></p>
+
+        <div id="reviewArea" class="review"></div>
+
+        <div class="actions">
+          <button id="restartBtn" class="btn" type="button">Restart-quiz</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Translation widget -->
+    <div class="gtranslate_wrapper"></div>
+    <script>window.gtranslateSettings = {"default_language":"en","native_language_names":true,"detect_browser_language":true,"wrapper_selector":".gtranslate_wrapper","alt_flags":{"en":"canada"}}</script>
+    <script src="https://cdn.gtranslate.net/widgets/latest/float.js" defer></script>
+
+    <footer class="foot">
+      <small>
+      BCIT-BBY2 Copyright
+      </small>
+    </footer>
+  </main>
+
+  <!-- Sound Effects (local files) -->
+  <audio id="goalSound" src="/assets/goal-6eHVJX2A.mp3" preload="auto"></audio>
+  <audio id="failSound" src="/assets/fail-CWFzza6U.mp3" preload="auto"></audio>
+
+</body>
+</html>

@@ -1,6 +1,7 @@
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebaseConfig.js";
 import { logoutUser } from "../authentication.js";
+import menuIcon from '/public/images/menu.png';
 
 class SiteNavbar extends HTMLElement {
     constructor() {
@@ -15,7 +16,7 @@ class SiteNavbar extends HTMLElement {
                 <div class="container-fluid">
                     <div class="dropdown">
                         <button class="btn btn-transparent dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="./src/images/menu.png" height="24">
+                            <img src="${menuIcon}" height="24">
                         </button>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="./main.html">Home</a></li>
