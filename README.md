@@ -52,11 +52,12 @@ Once the application is running:
 
 ```
 VanGoal/
+├── public/
+│   ├── images/
+│   │   └── images
 ├── src/
 │   ├── components/
 │   │   └── site-navbar.js
-│   ├── images/
-│   │   └── images
 │   ├── sounds/
 │   │   └── sounds
 │   ├── styles/
