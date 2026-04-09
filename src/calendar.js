@@ -351,7 +351,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Return to the previous page
   if (backBtn) {
     backBtn.onclick = () => {
-      window.history.back();
+      window.location.href = "./main.html";
     };
   }
 
